@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ExpressDeliveryDbContext.cs~RFac5efdc.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.25" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ExpressDelivery.Application\ExpressDelivery.Application.csproj" />
   </ItemGroup>
 
