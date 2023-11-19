@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Ts { get; set; }
-        public List<Order> Orders { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

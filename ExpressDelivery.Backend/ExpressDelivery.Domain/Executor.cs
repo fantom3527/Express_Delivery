@@ -8,6 +8,6 @@
         public int ExecutorStatusId { get; set; }
         public DateTime Ts { get; set; }
         public ExecutorStatus ExecutorStatus { get; set; }
-        public List<Order> Orders { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

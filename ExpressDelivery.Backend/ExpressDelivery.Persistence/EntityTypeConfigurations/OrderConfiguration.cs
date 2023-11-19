@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ExpressDelivery.Domain
 {
-    public class OrderConfiguration : IEntityTypeConfiguration<Order>
+    internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
@@ -12,9 +12,9 @@ namespace ExpressDelivery.Domain
             builder.HasIndex(order => order.Id).IsUnique();
             builder.Property(order => order.Id).HasColumnName("Id");
             builder.HasOne(order => order.OrderStatus)
-                   .WithMany(orderStatus => orderStatus.Orders)
+                   .WithMany()
                    .HasForeignKey(order => order.OrderStatusId);
-            builder.Property(order => order.OrderStatusId).HasColumnName("OrderStatus_Id");
+            builder.Property(order => order.OrderStatusId).HasColumnName("OrderStatus_Id").IsRequired();
             builder.HasOne(order => order.Executor)
                    .WithMany(executor => executor.Orders)
                    .HasForeignKey(order => order.ExecutorId);
@@ -28,7 +28,7 @@ namespace ExpressDelivery.Domain
             builder.Property(order => order.DeliveryAddress).HasColumnName("DeliveryAddress").IsRequired().HasMaxLength(100);
             builder.Property(order => order.Description).HasColumnName("Description").HasMaxLength(1000);
             builder.Property(order => order.ReceiptTime).HasColumnName("ReceiptTime").IsRequired();
-            builder.Property(order => order.DeliveryTime).HasColumnName("DeliveryTime");
+            builder.Property(order => order.DeliveryTime).HasColumnName("DeliveryTime").IsRequired();
             builder.Property(order => order.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }

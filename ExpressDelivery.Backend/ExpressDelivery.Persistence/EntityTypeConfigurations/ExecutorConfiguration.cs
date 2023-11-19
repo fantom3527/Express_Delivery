@@ -9,16 +9,16 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<Executor> builder)
         {
             builder.ToTable("Executor");
-            builder.HasKey(city => city.Id);
-            builder.HasIndex(user => user.Id).IsUnique();
-            builder.Property(city => city.Id).HasColumnName("Id");
-            builder.HasOne(order => order.ExecutorStatus)
-                   .WithMany(executorStatus => executorStatus.Executors)
-                   .HasForeignKey(order => order.ExecutorStatusId);
-            builder.Property(city => city.ExecutorStatusId).HasColumnName("ExecutorStatus_Id");
-            builder.Property(city => city.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-            builder.Property(city => city.Description).HasColumnName("Description").HasMaxLength(1000);
-            builder.Property(city => city.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.HasKey(executor => executor.Id);
+            builder.HasIndex(executor => executor.Id).IsUnique();
+            builder.Property(executor => executor.Id).HasColumnName("Id");
+            builder.HasOne(executor => executor.ExecutorStatus)
+                   .WithMany()
+                   .HasForeignKey(executor => executor.ExecutorStatusId);
+            builder.Property(executor => executor.ExecutorStatusId).HasColumnName("ExecutorStatus_Id").IsRequired();
+            builder.Property(executor => executor.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
+            builder.Property(executor => executor.Description).HasColumnName("Description").HasMaxLength(1000);
+            builder.Property(executor => executor.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }
