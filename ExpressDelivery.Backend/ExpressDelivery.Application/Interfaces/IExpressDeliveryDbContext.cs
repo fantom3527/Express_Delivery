@@ -5,10 +5,11 @@ namespace ExpressDelivery.Application.Interfaces
 {
     public interface IExpressDeliveryDbContext
     {
-        DbSet<Order> Order { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<OrderHistory> OrderHistory { get; set; }
-        DbSet<Executor> Executor { get; set; }
+        public DbSet<OrderHistoryMethod> OrderHistoryMethod { get; set; }
+        public DbSet<Executor> Executor { get; set; }
         public DbSet<ExecutorStatus> ExecutorStatus { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Cargo> Cargo { get; set; }

@@ -1,5 +1,5 @@
-﻿using ExpressDelivery.Application.Repository;
-using ExpressDelivery.Application.Repository.Interfaces;
+﻿using ExpressDelivery.Application.Repositories;
+using ExpressDelivery.Application.Repositories.Interfaces;
 using ExpressDelivery.Application.Services;
 using ExpressDelivery.Application.Services.Interfaces;
 using FluentValidation;

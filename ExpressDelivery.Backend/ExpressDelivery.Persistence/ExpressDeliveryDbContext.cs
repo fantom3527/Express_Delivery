@@ -12,6 +12,7 @@ namespace ExpressDelivery.Persistence
         public DbSet<OrderHistory> OrderHistory { get; set; }
         public DbSet<Executor> Executor { get; set; }
         public DbSet<ExecutorStatus> ExecutorStatus { get; set; }
+        public DbSet<OrderHistoryMethod> OrderHistoryMethod { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Cargo> Cargo { get; set; }
         public DbSet<CargoType> CargoType { get; set; }
@@ -24,6 +25,7 @@ namespace ExpressDelivery.Persistence
             builder.ApplyConfiguration(new OrderConfiguration());
             builder.ApplyConfiguration(new OrderStatusConfiguration());
             builder.ApplyConfiguration(new OrderHistoryConfiguration());
+            builder.ApplyConfiguration(new OrderHistoryMethodConfiguration());
             builder.ApplyConfiguration(new ExecutorConfiguration());
             builder.ApplyConfiguration(new ExecutorStatusConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());

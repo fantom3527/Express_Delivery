@@ -1,4 +1,4 @@
-﻿using ExpressDelivery.Application.Repository.Interfaces;
+﻿using ExpressDelivery.Application.Repositories.Interfaces;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 

@@ -16,7 +16,11 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
                    .WithMany(order => order.OrderHistories)
                    .HasForeignKey(orderHistory => orderHistory.OrderId);
             builder.Property(orderHistory => orderHistory.OrderId).HasColumnName("Order_Id").IsRequired();
-            builder.Property(orderHistory => orderHistory.NameMethod).HasColumnName("NameMethod").IsRequired().HasMaxLength(50);
+
+            builder.HasOne(orderHistory => orderHistory.OrderHistoryMethod)
+                   .WithMany()
+                   .HasForeignKey(orderHistory => orderHistory.OrderHistoryMethodId);
+            builder.Property(orderHistory => orderHistory.OrderHistoryMethodId).HasColumnName("OrderHistoryMethod_Id").IsRequired();
             builder.Property(orderHistory => orderHistory.Description).HasColumnName("Description").HasMaxLength(1000);
             builder.Property(orderHistory => orderHistory.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
