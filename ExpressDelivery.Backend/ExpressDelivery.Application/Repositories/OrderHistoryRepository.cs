@@ -18,14 +18,14 @@ namespace ExpressDelivery.Application.Repositories
             return await _dbContext.OrderHistory.ToListAsync();
         }
 
-        public async Task<IEnumerable<OrderHistory>> GetOrderAll(Guid orderId)
+        public async Task<IEnumerable<OrderHistory>> GetAllByOrder(Guid orderId)
         {
             return await _dbContext.OrderHistory.Where(orderHistory => orderHistory.OrderId == orderId).ToListAsync();
         }
 
         public async Task<OrderHistory> Get(Guid id)
         {
-            return await _dbContext.OrderHistory.SingleOrDefaultAsync(orderHistory => orderHistory.Id == id) ?? throw new NotFoundException("Order not found", id);
+            return await _dbContext.OrderHistory.SingleOrDefaultAsync(orderHistory => orderHistory.Id == id) ?? throw new NotFoundException("OrderHistory not found", id);
         }
 
         public async Task<Guid> Create(OrderHistory orderHistory)

@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<Executor> Get(Guid id)
         {
-            return await _dbContext.Executor.SingleOrDefaultAsync(executor => executor.Id == id) ?? throw new NotFoundException("Order not found", id);
+            return await _dbContext.Executor.SingleOrDefaultAsync(executor => executor.Id == id) ?? throw new NotFoundException("Executor not found", id);
         }
 
         public async Task<Guid> Create(Executor executor)
