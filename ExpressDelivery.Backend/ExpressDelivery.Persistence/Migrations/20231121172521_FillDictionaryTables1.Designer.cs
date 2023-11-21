@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpressDelivery.Persistence.Migrations
 {
     [DbContext(typeof(ExpressDeliveryDbContext))]
-    [Migration("20231121031824_Create")]
-    partial class Create
+    [Migration("20231121172521_FillDictionaryTables1")]
+    partial class FillDictionaryTables1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(1000)
+                        .HasMaxLength(20)
                         .HasColumnType("TEXT")
                         .HasColumnName("Code");
 
@@ -89,7 +89,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
