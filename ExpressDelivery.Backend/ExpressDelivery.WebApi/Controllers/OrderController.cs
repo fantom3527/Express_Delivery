@@ -26,7 +26,7 @@ namespace ExpressDelivery.WebApi.Controllers
             return Ok(await Service.Get(id));
         }
 
-        [HttpGet("{query-text/queryText}")]
+        [HttpGet("query-text/{queryText}")]
         public async Task<ActionResult<IEnumerable<Order>>> GetQuery(string queryText)
         {
             return Ok(await Service.GetQuery(queryText));
@@ -56,8 +56,8 @@ namespace ExpressDelivery.WebApi.Controllers
             return NoContent();
         }
 
-        [HttpPut("assignment-executor/{orderId}/{executorId}")]
-        public async Task<ActionResult> AssignmentExecutor(Guid orderId, Guid executorId)
+        [HttpPut("assignment-executor")]
+        public async Task<ActionResult> AssignmentExecutor([FromQuery] Guid orderId, [FromQuery] Guid executorId)
         {
             await Service.AssignmentExecutor(orderId, executorId);
 

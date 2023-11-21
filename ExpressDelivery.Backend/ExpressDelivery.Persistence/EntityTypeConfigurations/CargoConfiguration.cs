@@ -15,7 +15,7 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
             builder.HasOne(cargo => cargo.Order)
                    .WithMany(order => order.Cargos)
                    .HasForeignKey(cargo => cargo.OrderId);
-            builder.Property(cargo => cargo.OrderId).HasColumnName("Order_Id").IsRequired();
+            builder.Property(cargo => cargo.OrderId).HasColumnName("Order_Id");
             builder.HasOne(cargo => cargo.CargoType)
                    .WithMany()
                    .HasForeignKey(cargo => cargo.CargoTypeId);

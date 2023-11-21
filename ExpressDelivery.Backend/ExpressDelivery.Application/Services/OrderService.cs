@@ -28,7 +28,8 @@ namespace ExpressDelivery.Application.Services
         public async Task<Guid> Create(Order order)
         {
             await CreateOrder(order);
-            await CreateOrderHistory(order.Id, "Create");
+            //TODO: Исправить на Enum
+            await CreateOrderHistory(order.Id, "create");
             await _repositoryManager.SaveChangesAsync();
 
             return order.Id;
@@ -41,6 +42,7 @@ namespace ExpressDelivery.Application.Services
                 return;
 
             await _repositoryManager.OrderRepository.Update(order);
+            //TODO: Исправить на Enum
             await CreateOrderHistory(order.Id, "edit");
             await _repositoryManager.SaveChangesAsync();
         }
@@ -49,12 +51,14 @@ namespace ExpressDelivery.Application.Services
         {
             await _repositoryManager.OrderRepository.UpdateStatus(id, orderStatusId);
             // TODO: Проверить как будет без описание и с описанием.
+            //TODO: Исправить на Enum
             await CreateOrderHistory(id, "updatestatus", descriptionUpdateStatus);
             await _repositoryManager.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
+            //TODO: Исправить на Enum
             await _repositoryManager.OrderRepository.Delete(id, await GetOrderStatusId("deleted"));
             await CreateOrderHistory(id, "delete");
             await _repositoryManager.SaveChangesAsync();
@@ -63,6 +67,7 @@ namespace ExpressDelivery.Application.Services
         public async Task AssignmentExecutor(Guid orderId, Guid executorId)
         {
             await _repositoryManager.OrderRepository.AssignmentExecutor(orderId, executorId);
+            //TODO: Исправить на Enum
             await _repositoryManager.OrderRepository.UpdateStatus(orderId, await GetOrderStatusId("submitted"));
             await _repositoryManager.ExecutorRepository.UpdateStatus(executorId, await GetExecutorStatusId("executesorder"));
             await CreateOrderHistory(orderId, "assignmentexecutor");
@@ -104,6 +109,7 @@ namespace ExpressDelivery.Application.Services
         {
             var orderStatus = await _repositoryManager.OrderStatusRepository.Get(orderStatusId);
 
+            //TODO: Исправить на Enum
             return orderStatus.Code == "new";
         }
     }
