@@ -21,14 +21,11 @@ namespace ExpressDelivery.WebApi
                 {
                     var context = serviceProvider.GetRequiredService<ExpressDeliveryDbContext>();
                     DbInitializer.Initialize(context);
-                    serviceProvider.GetRequiredService<ExpressDeliveryDbContext>().Database.Migrate();
                 }
                 catch (Exception exception)
                 {
                     Log.Fatal(exception, "An error occurred while app initialization");
                 }
-
-
             }
 
             using (var scope = host.Services.CreateScope())

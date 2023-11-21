@@ -13,9 +13,9 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
             builder.HasIndex(cargoType => cargoType.Id).IsUnique();
             builder.Property(cargoType => cargoType.Id).HasColumnName("Id");
             builder.Property(cargoType => cargoType.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-            builder.Property(cargoType => cargoType.Code).HasColumnName("Code").HasMaxLength(1000);
+            builder.Property(cargoType => cargoType.Code).HasColumnName("Code").HasMaxLength(20);
             builder.Property(cargoType => cargoType.IsActual).HasColumnName("IsActual").IsRequired();
-            builder.Property(cargoType => cargoType.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(cargoType => cargoType.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP").HasColumnType("DATETIME");
         }
     }
 }
