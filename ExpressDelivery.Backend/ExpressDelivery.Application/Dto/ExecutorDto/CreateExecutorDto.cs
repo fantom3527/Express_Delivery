@@ -2,7 +2,7 @@
 using ExpressDelivery.Domain;
 using ExpressDelivery.Application.Common.Mapping;
 
-namespace ExpressDelivery.Application.Dto.Order
+namespace ExpressDelivery.Application.Dto.ExecutorDto
 {
     public record class CreateExecutorDto : IMapWith<Executor>
     {

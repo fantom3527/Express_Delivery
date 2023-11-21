@@ -52,9 +52,6 @@ namespace ExpressDelivery.Application.Repositories
 
             orderToUpdate.Name = order.Name;
             orderToUpdate.Description = order.Description;
-            orderToUpdate.OrderStatusId = order.OrderStatusId;
-            orderToUpdate.ExecutorId = order.ExecutorId;
-            orderToUpdate.UserId = order.UserId;
             orderToUpdate.ReceiptAddress = order.ReceiptAddress;
             orderToUpdate.DeliveryAddress = order.DeliveryAddress;
             orderToUpdate.ReceiptTime = order.ReceiptTime;
