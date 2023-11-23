@@ -21,6 +21,8 @@ namespace ExpressDelivery.Application
             services.AddScoped<IOrderHistoryRepository, OrderHistoryRepository>();
             services.AddScoped<IOrderHistoryMethodRepository, OrderHistoryMethodRepository>();
             services.AddScoped<ICargoTypeRepository, CargoTypeRepository>();
+            services.AddScoped<ICargoRepository, CargoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
             services.AddScoped<IExecutorService, ExecutorService>();
@@ -30,6 +32,8 @@ namespace ExpressDelivery.Application
             services.AddScoped<IOrderHistoryService, OrderHistoryService>();
             services.AddScoped<IOrderHistoryMethodService, OrderHistoryMethodService>();
             services.AddScoped<ICargoTypeService, CargoTypeService>();
+            services.AddScoped<ICargoService, CargoService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
 
             return services;
