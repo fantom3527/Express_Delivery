@@ -9,7 +9,6 @@ namespace ExpressDelivery.Application.Dto.ExecutorDto
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int ExecutorStatusId { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -19,9 +18,7 @@ namespace ExpressDelivery.Application.Dto.ExecutorDto
                    .ForPath(Executor => Executor.Name,
                        opt => opt.MapFrom(updateExecutorDto => updateExecutorDto.Name))
                    .ForPath(Executor => Executor.Description,
-                       opt => opt.MapFrom(updateExecutorDto => updateExecutorDto.Description))
-                   .ForPath(Executor => Executor.ExecutorStatusId,
-                       opt => opt.MapFrom(updateExecutorDto => updateExecutorDto.ExecutorStatusId));
+                       opt => opt.MapFrom(updateExecutorDto => updateExecutorDto.Description));
         }
     }
 }
