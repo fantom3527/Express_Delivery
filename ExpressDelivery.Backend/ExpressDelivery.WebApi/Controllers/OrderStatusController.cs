@@ -10,7 +10,17 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class OrderStatusController : BaseController<IOrderStatusService>
     {
+        /// <summary>
+        /// Gets all OrderStatuses.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /OrderStatus
+        /// </remarks>
+        /// <returns>Returns OrderStatuses.</returns>
+        /// <response code="200">Success</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<OrderStatus>>> GetAll()
         {
             return Ok(await Service.GetAll());

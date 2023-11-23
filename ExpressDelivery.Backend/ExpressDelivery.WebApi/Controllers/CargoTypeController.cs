@@ -10,7 +10,17 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class CargoTypeController : BaseController<ICargoTypeService>
     {
+        /// <summary>
+        /// Gets all CargoTypes.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /CargoType
+        /// </remarks>
+        /// <returns>Returns CargoTypes.</returns>
+        /// <response code="200">Success</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<CargoType>>> GetAll()
         {
             return Ok(await Service.GetAll());

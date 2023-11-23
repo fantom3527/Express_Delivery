@@ -10,8 +10,18 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class ExecutorStatusController : BaseController<IExecutorStatusService>
     {
+        /// <summary>
+        /// Gets all ExecutorStatuses.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /ExecutorStatus
+        /// </remarks>
+        /// <returns>Returns ExecutorStatuses.</returns>
+        /// <response code="200">Success</response>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Executor>>> GetAll()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<ExecutorStatus>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }

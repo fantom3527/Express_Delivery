@@ -10,7 +10,17 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class OrderHistoryMethodController : BaseController<IOrderHistoryMethodService>
     {
+        /// <summary>
+        /// Gets all OrderHistoryMethods.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /OrderHistoryMethod
+        /// </remarks>
+        /// <returns>Returns OrderHistoryMethods.</returns>
+        /// <response code="200">Success</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<OrderHistoryMethod>>> GetAll()
         {
             return Ok(await Service.GetAll());
