@@ -23,7 +23,7 @@ namespace ExpressDelivery.Application.Repositories
             return await _dbContext.OrderStatus.SingleOrDefaultAsync(orderStatus => orderStatus.Id == id) ?? throw new NotFoundException("OrderStatus not found", id);
         }
 
-        public async Task<int> GetId(string code)
+        public async Task<int> GetIdByCode(string code)
         {
             var orderStatus = await _dbContext.OrderStatus.SingleOrDefaultAsync(orderStatus => orderStatus.Code == code);
 

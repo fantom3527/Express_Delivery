@@ -6,6 +6,6 @@ namespace ExpressDelivery.Application.Repositories.Interfaces
     {
         public Task<IEnumerable<OrderStatus>> GetAll();
         public Task<OrderStatus> Get(int id);
-        public Task<int> GetId(string code);
+        public Task<int> GetIdByCode(string code);
     }
 }

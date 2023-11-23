@@ -97,7 +97,7 @@ namespace ExpressDelivery.Application.Services
 
         private async Task<int> GetOrderStatusId(string orderStatusCode)
         {
-            return await _repositoryManager.OrderStatusRepository.GetId(orderStatusCode);
+            return await _repositoryManager.OrderStatusRepository.GetIdByCode(orderStatusCode);
         }
 
         private async Task<int> GetExecutorStatusId(string executorStatusCode)
