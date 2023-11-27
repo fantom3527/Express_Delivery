@@ -3,7 +3,7 @@
     public class Cargo
     {
         public Guid Id { get; set; }
-        public Guid OrderId { get; set; }
+        public Guid? OrderId { get; set; }
         public int CargoTypeId { get; set; } //TODO Типы вида посылка, письмо и тд. Наверное сделать Enum
         public string Name { get; set; }
         public string Description { get; set; }

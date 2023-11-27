@@ -18,7 +18,7 @@ namespace ExpressDelivery.Domain
             builder.HasOne(order => order.Executor)
                    .WithMany(executor => executor.Orders)
                    .HasForeignKey(order => order.ExecutorId);
-            builder.Property(order => order.ExecutorId).HasColumnName("Executor_Id");
+            builder.Property(order => order.ExecutorId).HasColumnName("Executor_Id").IsRequired(false);
             builder.HasOne(order => order.User)
                    .WithMany(user => user.Orders)
                    .HasForeignKey(order => order.UserId);
@@ -29,7 +29,7 @@ namespace ExpressDelivery.Domain
             builder.Property(order => order.Description).HasColumnName("Description").HasMaxLength(1000);
             builder.Property(order => order.ReceiptTime).HasColumnName("ReceiptTime").IsRequired();
             builder.Property(order => order.DeliveryTime).HasColumnName("DeliveryTime").IsRequired();
-            builder.Property(order => order.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(order => order.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

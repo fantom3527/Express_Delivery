@@ -99,6 +99,30 @@ namespace ExpressDelivery.WebApi.Controllers
         }
 
         /// <summary>
+        /// Changes status the Executor.
+        /// </summary>
+        /// Sample request:
+        /// <remarks>
+        /// PUT /Executor/status
+        /// {
+        ///     id: "Executor id"
+        ///     executorStatusId: "Executor status id"
+        /// }
+        /// </remarks>
+        /// <param name="id">Executor id.</param>
+        /// <param name="executorStatusId">Executor status id.</param>
+        /// <returns>Return NoContent.</returns>
+        /// <response code="200">Success</response>
+        [HttpPut("status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> UpdateStatus([FromQuery] Guid id, [FromQuery] int executorStatusId)
+        {
+            await Service.UpdateStatus(id, executorStatusId);
+
+            return NoContent();
+        }
+
+        /// <summary>
         /// Deletes the Executor by id.
         /// </summary>
         /// <remarks>

@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public int OrderStatusId { get; set; }
-        public Guid ExecutorId { get; set; }
+        public Guid? ExecutorId { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string ReceiptAddress { get; set; }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpressDelivery.Persistence.Migrations
 {
     [DbContext(typeof(ExpressDeliveryDbContext))]
-    [Migration("20231121172521_FillDictionaryTables1")]
-    partial class FillDictionaryTables1
+    [Migration("20231127045337_FillTestData")]
+    partial class FillTestData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,13 +42,13 @@ namespace ExpressDelivery.Persistence.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("Name");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid?>("OrderId")
                         .HasColumnType("TEXT")
                         .HasColumnName("Order_Id");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -126,7 +126,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -165,7 +165,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -200,7 +200,7 @@ namespace ExpressDelivery.Persistence.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("Description");
 
-                    b.Property<Guid>("ExecutorId")
+                    b.Property<Guid?>("ExecutorId")
                         .HasColumnType("TEXT")
                         .HasColumnName("Executor_Id");
 
@@ -226,7 +226,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -256,7 +256,6 @@ namespace ExpressDelivery.Persistence.Migrations
                         .HasColumnName("Id");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT")
                         .HasColumnName("Description");
@@ -271,7 +270,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -284,7 +283,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("orderHistory", (string)null);
+                    b.ToTable("OrderHistory", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.OrderHistoryMethod", b =>
@@ -312,7 +311,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -349,7 +348,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -382,7 +381,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("TS")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -404,9 +403,7 @@ namespace ExpressDelivery.Persistence.Migrations
 
                     b.HasOne("ExpressDelivery.Domain.Order", "Order")
                         .WithMany("Cargos")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("CargoType");
 
@@ -428,9 +425,7 @@ namespace ExpressDelivery.Persistence.Migrations
                 {
                     b.HasOne("ExpressDelivery.Domain.Executor", "Executor")
                         .WithMany("Orders")
-                        .HasForeignKey("ExecutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExecutorId");
 
                     b.HasOne("ExpressDelivery.Domain.OrderStatus", "OrderStatus")
                         .WithMany()

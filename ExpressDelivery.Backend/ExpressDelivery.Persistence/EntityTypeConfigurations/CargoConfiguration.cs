@@ -15,14 +15,14 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
             builder.HasOne(cargo => cargo.Order)
                    .WithMany(order => order.Cargos)
                    .HasForeignKey(cargo => cargo.OrderId);
-            builder.Property(cargo => cargo.OrderId).HasColumnName("Order_Id");
+            builder.Property(cargo => cargo.OrderId).HasColumnName("Order_Id").IsRequired(false);
             builder.HasOne(cargo => cargo.CargoType)
                    .WithMany()
                    .HasForeignKey(cargo => cargo.CargoTypeId);
             builder.Property(cargo => cargo.CargoTypeId).HasColumnName("CargoType_Id").IsRequired();
             builder.Property(cargo => cargo.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
             builder.Property(cargo => cargo.Description).HasColumnName("Description").HasMaxLength(1000);
-            builder.Property(cargo => cargo.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(cargo => cargo.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

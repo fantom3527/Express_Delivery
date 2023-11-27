@@ -13,7 +13,7 @@ namespace ExpressDelivery.Domain
             builder.Property(user => user.Id).HasColumnName("Id");
             builder.Property(user => user.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
             builder.Property(user => user.Description).HasColumnName("Description").HasMaxLength(500);
-            builder.Property(user => user.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(user => user.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

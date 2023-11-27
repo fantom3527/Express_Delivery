@@ -8,7 +8,7 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderHistory> builder)
         {
-            builder.ToTable("orderHistory");
+            builder.ToTable("OrderHistory");
             builder.HasKey(orderHistory => orderHistory.Id);
             builder.HasIndex(orderHistory => orderHistory.Id).IsUnique();
             builder.Property(orderHistory => orderHistory.Id).HasColumnName("Id");
@@ -21,8 +21,8 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
                    .WithMany()
                    .HasForeignKey(orderHistory => orderHistory.OrderHistoryMethodId);
             builder.Property(orderHistory => orderHistory.OrderHistoryMethodId).HasColumnName("OrderHistoryMethod_Id").IsRequired();
-            builder.Property(orderHistory => orderHistory.Description).HasColumnName("Description").HasMaxLength(1000);
-            builder.Property(orderHistory => orderHistory.Ts).HasColumnName("TS").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(orderHistory => orderHistory.Description).HasColumnName("Description").HasMaxLength(1000).IsRequired(false);
+            builder.Property(orderHistory => orderHistory.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }
