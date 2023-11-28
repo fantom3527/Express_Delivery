@@ -1,4 +1,5 @@
-﻿using ExpressDelivery.Application.Services.Interfaces;
+﻿using ExpressDelivery.Application.Common.Exception;
+using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -37,7 +38,14 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<User>> Get([Required] Guid id)
         {
-            return Ok(await Service.Get(id));
+            try
+            {
+                return Ok(await Service.Get(id));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

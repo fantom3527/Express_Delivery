@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ExpressDelivery.Application.Common.Exception;
 using ExpressDelivery.Application.Dto.OrderDto;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
@@ -45,7 +46,14 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Order>> Get([Required] Guid id)
         {
-            return Ok(await Service.Get(id));
+            try
+            {
+                return Ok(await Service.Get(id));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         /// <summary>
@@ -183,7 +191,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Delete(Guid[Required] id)
+        public async Task<ActionResult> Delete([Required] Guid id)
         {
             await Service.Delete(id);
 

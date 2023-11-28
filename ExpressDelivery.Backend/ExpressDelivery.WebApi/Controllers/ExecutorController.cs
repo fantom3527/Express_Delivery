@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ExpressDelivery.Application.Common.Exception;
 using ExpressDelivery.Application.Dto.ExecutorDto;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
@@ -46,7 +47,14 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Executor>> Get([Required] Guid id)
         {
-            return Ok(await Service.Get(id));
+            try
+            {
+                return Ok(await Service.Get(id));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         /// <summary>
