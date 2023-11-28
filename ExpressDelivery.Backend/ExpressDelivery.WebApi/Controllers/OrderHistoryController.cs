@@ -38,7 +38,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OrderHistory>>> GetAllByOrder(Guid orderId)
+        public async Task<ActionResult<IEnumerable<OrderHistory>>> GetAllByOrder([Required] Guid orderId)
         {
             return Ok(await Service.GetAllByOrder(orderId));
         }

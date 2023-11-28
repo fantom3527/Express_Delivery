@@ -1,6 +1,7 @@
 ﻿using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpressDelivery.WebApi.Controllers
 {
@@ -34,7 +35,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<User>> Get(Guid id)
+        public async Task<ActionResult<User>> Get([Required] Guid id)
         {
             return Ok(await Service.Get(id));
         }

@@ -3,6 +3,7 @@ using ExpressDelivery.Application.Dto.ExecutorDto;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpressDelivery.WebApi.Controllers
 {
@@ -43,7 +44,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Executor>> Get(Guid id)
+        public async Task<ActionResult<Executor>> Get([Required] Guid id)
         {
             return Ok(await Service.Get(id));
         }
@@ -65,7 +66,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> Create(CreateExecutorDto createExecutorDto)
+        public async Task<ActionResult<Guid>> Create([Required] CreateExecutorDto createExecutorDto)
         {
             var command = _mapper.Map<Executor>(createExecutorDto);
             return Ok(await Service.Create(command));
@@ -88,7 +89,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Update([FromBody] UpdateExecutorDto updateExecutorDto)
+        public async Task<ActionResult> Update([FromBody][Required] UpdateExecutorDto updateExecutorDto)
         {
             var command = _mapper.Map<Executor>(updateExecutorDto);
             await Service.Update(command);
@@ -113,7 +114,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut("status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UpdateStatus([FromQuery] Guid id, [FromQuery] int executorStatusId)
+        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int executorStatusId)
         {
             await Service.UpdateStatus(id, executorStatusId);
 
@@ -132,7 +133,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete([Required] Guid id)
         {
             await Service.Delete(id);
 

@@ -3,6 +3,7 @@ using ExpressDelivery.Application.Dto.OrderDto;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpressDelivery.WebApi.Controllers
 {
@@ -42,7 +43,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Order>> Get(Guid id)
+        public async Task<ActionResult<Order>> Get([Required] Guid id)
         {
             return Ok(await Service.Get(id));
         }
@@ -59,7 +60,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("query-text/{queryText}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Order>>> GetQuery(string queryText)
+        public async Task<ActionResult<IEnumerable<Order>>> GetQuery([Required] string queryText)
         {
             return Ok(await Service.GetQuery(queryText));
         }
@@ -85,7 +86,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> Create(CreateOrderDto createOrderDto)
+        public async Task<ActionResult<Guid>> Create([Required] CreateOrderDto createOrderDto)
         {
             var command = _mapper.Map<Order>(createOrderDto);
             return Ok(await Service.Create(command));
@@ -112,7 +113,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Update([FromBody] UpdateOrderDto updateOrderDto)
+        public async Task<ActionResult> Update([FromBody][Required] UpdateOrderDto updateOrderDto)
         {
             var command = _mapper.Map<Order>(updateOrderDto);
             await Service.Update(command);
@@ -139,7 +140,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut("status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UpdateStatus([FromQuery] Guid id, [FromQuery] int orderStatusId, [FromQuery] string descriptionUpdateStatus)
+        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int orderStatusId, [FromQuery] string descriptionUpdateStatus)
         {
             await Service.UpdateStatus(id, orderStatusId, descriptionUpdateStatus);
 
@@ -163,7 +164,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut("add-executor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> AddExecutor([FromQuery] Guid id, [FromQuery] Guid executorId)
+        public async Task<ActionResult> AddExecutor([FromQuery][Required] Guid id, [FromQuery][Required] Guid executorId)
         {
             await Service.AddExecutor(id, executorId);
 
@@ -182,7 +183,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid[Required] id)
         {
             await Service.Delete(id);
 
