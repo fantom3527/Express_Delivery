@@ -22,15 +22,13 @@ namespace ExpressDelivery.WebApi.Controllers
             return Ok(await Service.GetAll());
         }
 
-        //TODO: добавить актуальный id
-
         /// <summary>
         /// Gets User by id.
         /// </summary>
         /// /// <param name="id">User id (guid).</param>
         /// <remarks>
         /// Sample request:
-        /// GET /User/13360799-8908-4449-9CA9-64A3AA5AEA8C
+        /// GET /User/7D35C407-7930-4BC8-A1DD-D8610155472A
         /// </remarks>
         /// <returns>Returns User.</returns>
         /// <response code="200">Success</response>

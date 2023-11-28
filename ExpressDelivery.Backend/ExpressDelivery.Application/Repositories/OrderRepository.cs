@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<Order> Get(Guid id)
         {
-            return await _dbContext.Order.SingleOrDefaultAsync(order => order.Id == id) ?? throw new NotFoundException("Order not found", id);
+            return await _dbContext.Order.FindAsync(id) ?? throw new NotFoundException("Order not found", id);
         }
 
         public async Task<IEnumerable<Order>> GetQuery(string queryText)
@@ -60,7 +60,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task UpdateStatus(Guid id, int orderStatusId)
         {
-            var orderToUpdateStatus = await _dbContext.Order.SingleOrDefaultAsync(order => order.Id == id);
+            var orderToUpdateStatus = await _dbContext.Order.FindAsync(id);
             if (orderToUpdateStatus == null)
                 return;
 
@@ -69,20 +69,20 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task Delete(Guid id, int orderStatusDeleteId)
         {
-            var orderToDelete = await _dbContext.Order.SingleOrDefaultAsync(order => order.Id == id);
+            var orderToDelete = await _dbContext.Order.FindAsync(id);
             if (orderToDelete == null)
                 return;
 
             orderToDelete.OrderStatusId = orderStatusDeleteId;
         }
 
-        public async Task AssignmentExecutor(Guid orderId, Guid executorId)
+        public async Task AddExecutor(Guid id, Guid executorId)
         {
-            var orderToAssignment = await _dbContext.Order.SingleOrDefaultAsync(order => order.Id == orderId);
-            if (orderToAssignment == null)
+            var addExecutorToOrder = await _dbContext.Order.FindAsync(id);
+            if (addExecutorToOrder == null)
                 return;
 
-            orderToAssignment.ExecutorId = executorId;
+            addExecutorToOrder.ExecutorId = executorId;
         }
 
         public async Task SaveChangesAsync()

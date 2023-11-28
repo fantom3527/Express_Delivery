@@ -36,7 +36,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <param name="id">Order id (guid).</param>
         /// <remarks>
         /// Sample request:
-        /// GET /Order/13360799-8908-4449-9CA9-64A3AA5AEA8C
+        /// GET /Order/A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568
         /// </remarks>
         /// <returns>Returns Order.</returns>
         /// <response code="200">Success</response>
@@ -72,14 +72,12 @@ namespace ExpressDelivery.WebApi.Controllers
         /// POST /Order
         /// {
         ///     name: "Order name"
-        ///     executorId: "13360799-8908-4449-9CA9-64A3AA5AEA8C"
-        ///     userId: "13360799-8908-4449-9CA9-64A3AA5AEA8C"
+        ///     userId: "7EEF1949-580D-4F67-B754-EC74CA91D836"
         ///     receiptAddress: "Komarovo"
         ///     deliveryAddress: "Moscow"
         ///     receiptTime: "10.10.2023" 
         ///     deliveryTime: "20.10.2023"
         ///     description: "Order description"
-        ///     orderStatusId: "1"
         /// }
         /// </remarks>
         /// <param name="createOrderDto">CreateOrderDto object.</param>
@@ -100,6 +98,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <remarks>
         /// PUT /Order
         /// {
+        ///     id: "A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"
         ///     name: "Order name"
         ///     receiptAddress: "Novosibirsk"
         ///     deliveryAddress: "Moscow"
@@ -128,7 +127,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <remarks>
         /// PUT /Order/status
         /// {
-        ///     id: "Order id"
+        ///     id: "8CC409BF-33EA-4FD5-8952-28EC247D4C4B"
         ///     orderStatusId: "Order status id"
         ///     descriptionUpdateStatus: "Description Update Status"
         /// }
@@ -148,25 +147,25 @@ namespace ExpressDelivery.WebApi.Controllers
         }
 
         /// <summary>
-        /// Assignments Executor To Order.
+        /// Add Executor to Order".
         /// </summary>
         /// Sample request:
         /// <remarks>
-        /// PUT /Order/assignment-executor
+        /// PUT /Order/add-executor
         /// {
-        ///     orderId: "Order id"
-        ///     executorId: "Executor id"
+        ///     id: "8CC409BF-33EA-4FD5-8952-28EC247D4C4B"
+        ///     executorId: "A56E0344-8120-4543-91D0-0726CA1DF416"
         /// }
         /// </remarks>
-        /// <param name="orderId">Order id.</param>
-        /// <param name="executorId">Order status id.</param>
+        /// <param name="id">Order id.</param>
+        /// <param name="executorId">Executor id.</param>
         /// <returns>Return NoContent.</returns>
         /// <response code="200">Success</response>
-        [HttpPut("assignment-executor")]
+        [HttpPut("add-executor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> AssignmentExecutor([FromQuery] Guid orderId, [FromQuery] Guid executorId)
+        public async Task<ActionResult> AddExecutor([FromQuery] Guid id, [FromQuery] Guid executorId)
         {
-            await Service.AssignmentExecutor(orderId, executorId);
+            await Service.AddExecutor(id, executorId);
 
             return NoContent();
         }
@@ -176,7 +175,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// DELETE /Order/88DEB432-062F-43DE-8DCD-8B6EF79073D3
+        /// DELETE /Order/A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568
         /// </remarks>
         /// <param name="id">Order id (guid).</param>
         /// <returns>Returns NoContent.</returns>

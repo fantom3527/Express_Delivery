@@ -26,15 +26,13 @@ namespace ExpressDelivery.WebApi.Controllers
             return Ok(await Service.GetAll());
         }
 
-        //TODO: Добавить из тестового актуальный id
-
         /// <summary>
         /// Gets OrderHistories by id.
         /// </summary>
         /// <param name="orderId">Order id (guid).</param>
         /// <remarks>
         /// Sample request:
-        /// GET /OrderHistory/13360799-8908-4449-9CA9-64A3AA5AEA8C
+        /// GET /OrderHistory/A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568
         /// </remarks>
         /// <returns>Returns OrderHistories.</returns>
         /// <response code="200">Success</response>

@@ -1,7 +1,8 @@
-﻿using ExpressDelivery.Application.Services.Interfaces;
+﻿using ExpressDelivery.Application.Common.Exception;
+using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpressDelivery.WebApi.Controllers
 {
@@ -26,23 +27,52 @@ namespace ExpressDelivery.WebApi.Controllers
             return Ok(await Service.GetAll());
         }
 
-        //TODO: Добавить актуальный ID тестового.
-
         /// <summary>
         /// Gets Cargo by id.
         /// </summary>
         /// <param name="id">Cargo id (guid).</param>
         /// <remarks>
         /// Sample request:
-        /// GET /Cargo/13360799-8908-4449-9CA9-64A3AA5AEA8C
+        /// GET /Cargo/66945C5A-7506-4D3D-BE01-49867C4E0A04
         /// </remarks>
         /// <returns>Returns Cargo.</returns>
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Cargo>> Get(Guid id)
+        public async Task<ActionResult<Cargo>> Get([Required] Guid id)
         {
-            return Ok(await Service.Get(id));
+            try
+            {
+                return Ok(await Service.Get(id));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Add Order to Cargo.
+        /// </summary>
+        /// Sample request:
+        /// <remarks>
+        /// PUT /Cargo
+        /// {
+        ///     id: "07E0E4F3-6DCB-4F50-851C-D24731849451"
+        ///     orderId: "A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"
+        /// }
+        /// </remarks>
+        /// <param name="id">Cargo id (Guid).</param>
+        /// <param name="orderId">Order id (Guid).</param>
+        /// <returns>Return NoContent.</returns>
+        /// <response code="200">Success</response>
+        [HttpPut("add-order")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> AddOrder([FromQuery][Required] Guid id, [FromQuery][Required] Guid orderId)
+        {
+            await Service.AddOrder(id, orderId);
+
+            return NoContent();
         }
     }
 }

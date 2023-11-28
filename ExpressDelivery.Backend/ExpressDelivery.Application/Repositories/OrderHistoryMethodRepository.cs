@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<OrderHistoryMethod> Get(int id)
         {
-            return await _dbContext.OrderHistoryMethod.SingleOrDefaultAsync(orderHistoryMethod => orderHistoryMethod.Id == id) ?? throw new NotFoundException("OrderHistoryMethod not found", id);
+            return await _dbContext.OrderHistoryMethod.FindAsync(id) ?? throw new NotFoundException("OrderHistoryMethod not found", id);
         }
 
         public async Task<int> GetId(string code)

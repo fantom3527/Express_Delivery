@@ -6,6 +6,7 @@ namespace ExpressDelivery.Application.Dto.OrderDto
 {
     public record class UpdateOrderDto : IMapWith<Order>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string ReceiptAddress { get; set; }
         public string DeliveryAddress { get; set; }
@@ -16,6 +17,8 @@ namespace ExpressDelivery.Application.Dto.OrderDto
         public void Mapping(Profile profile)
         {
             profile.CreateMap<UpdateOrderDto, Order>()
+                   .ForPath(order => order.Id,
+                       opt => opt.MapFrom(updateOrderDto => updateOrderDto.Id))
                    .ForPath(order => order.Name,
                        opt => opt.MapFrom(updateOrderDto => updateOrderDto.Name))
                    .ForPath(order => order.ReceiptAddress,

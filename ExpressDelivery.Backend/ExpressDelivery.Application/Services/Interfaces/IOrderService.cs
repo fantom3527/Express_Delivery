@@ -11,6 +11,6 @@ namespace ExpressDelivery.Application.Services.Interfaces
         public Task Update(Order order);
         public Task UpdateStatus(Guid id, int orderStatusId, string descriptionUpdateStatus);
         public Task Delete(Guid id);
-        public Task AssignmentExecutor(Guid orderId, Guid executorId);
+        public Task AddExecutor(Guid orderId, Guid executorId);
     }
 }

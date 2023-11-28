@@ -38,7 +38,7 @@ namespace ExpressDelivery.Application.Services
         public async Task Update(Order order)
         {
             // TODO: Реализация пробрасывания своего исключения, если статус при обновлении данных не новый.
-            if (!(await AllowEdit(order.OrderStatusId)))
+            if (!await AllowEdit(order.OrderStatusId))
                 return;
 
             await _repositoryManager.OrderRepository.Update(order);
@@ -64,9 +64,9 @@ namespace ExpressDelivery.Application.Services
             await _repositoryManager.SaveChangesAsync();
         }
 
-        public async Task AssignmentExecutor(Guid orderId, Guid executorId)
+        public async Task AddExecutor(Guid orderId, Guid executorId)
         {
-            await _repositoryManager.OrderRepository.AssignmentExecutor(orderId, executorId);
+            await _repositoryManager.OrderRepository.AddExecutor(orderId, executorId);
             //TODO: Исправить на Enum
             await _repositoryManager.OrderRepository.UpdateStatus(orderId, await GetOrderStatusId("submitted"));
             await _repositoryManager.ExecutorRepository.UpdateStatus(executorId, await GetExecutorStatusId("executesorder"));

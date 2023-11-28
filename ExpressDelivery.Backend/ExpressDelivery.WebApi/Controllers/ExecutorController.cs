@@ -31,15 +31,13 @@ namespace ExpressDelivery.WebApi.Controllers
             return Ok(await Service.GetAll());
         }
 
-        //TODO: Сделать актуалочку данных.
-
         /// <summary>
         /// Gets Executor by id.
         /// </summary>
         /// <param name="id">Executor id (guid).</param>
         /// <remarks>
         /// Sample request:
-        /// GET /Executor/13360799-8908-4449-9CA9-64A3AA5AEA8C
+        /// GET /Executor/A8D8532E-9DAA-4451-BE64-CC760E6A815C
         /// </remarks>
         /// <returns>Returns Executor.</returns>
         /// <response code="200">Success</response>
@@ -80,7 +78,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <remarks>
         /// PUT /Executor
         /// {
-        ///     id: "Executor id"
+        ///     id: "A8D8532E-9DAA-4451-BE64-CC760E6A815C"
         ///     name: "Executor name"
         ///     description: "Executor description"
         /// }
@@ -105,7 +103,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <remarks>
         /// PUT /Executor/status
         /// {
-        ///     id: "Executor id"
+        ///     id: "A8D8532E-9DAA-4451-BE64-CC760E6A815C"
         ///     executorStatusId: "Executor status id"
         /// }
         /// </remarks>
@@ -127,7 +125,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// DELETE /Executor/88DEB432-062F-43DE-8DCD-8B6EF79073D3
+        /// DELETE /Executor/A8D8532E-9DAA-4451-BE64-CC760E6A815C
         /// </remarks>
         /// <param name="id">Executor id (guid).</param>
         /// <returns>Returns NoContent.</returns>

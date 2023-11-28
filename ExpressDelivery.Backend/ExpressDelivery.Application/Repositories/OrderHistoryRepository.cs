@@ -25,7 +25,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<OrderHistory> Get(Guid id)
         {
-            return await _dbContext.OrderHistory.SingleOrDefaultAsync(orderHistory => orderHistory.Id == id) ?? throw new NotFoundException("OrderHistory not found", id);
+            return await _dbContext.OrderHistory.FindAsync(id) ?? throw new NotFoundException("OrderHistory not found", id);
         }
 
         public async Task<Guid> Create(OrderHistory orderHistory)

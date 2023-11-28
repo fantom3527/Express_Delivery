@@ -20,5 +20,11 @@ namespace ExpressDelivery.Application.Services
         {
             return await _cargoRepository.Get(id);
         }
+
+        public async Task AddOrder(Guid id, Guid orderId)
+        {
+            await _cargoRepository.AddOrder(id, orderId);
+            await _cargoRepository.SaveChangesAsync();
+        }
     }
 }

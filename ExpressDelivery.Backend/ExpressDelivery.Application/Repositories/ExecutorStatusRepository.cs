@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<ExecutorStatus> Get(int id)
         {
-            return await _dbContext.ExecutorStatus.SingleOrDefaultAsync(executorStatus => executorStatus.Id == id) ?? throw new NotFoundException("ExecutorStatus not found", id);
+            return await _dbContext.ExecutorStatus.FindAsync(id) ?? throw new NotFoundException("ExecutorStatus not found", id);
         }
 
         public async Task<int> GetId(string code)

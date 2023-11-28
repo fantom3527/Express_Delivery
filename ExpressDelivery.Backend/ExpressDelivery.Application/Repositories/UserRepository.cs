@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<User> Get(Guid id)
         {
-            return await _dbContext.User.SingleOrDefaultAsync(user => user.Id == id) ?? throw new NotFoundException("user not found", id);
+            return await _dbContext.User.FindAsync(id) ?? throw new NotFoundException("user not found", id);
         }
     }
 }

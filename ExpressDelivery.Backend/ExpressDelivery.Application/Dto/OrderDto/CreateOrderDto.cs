@@ -6,8 +6,6 @@ namespace ExpressDelivery.Application.Dto.OrderDto
 {
     public record class CreateOrderDto : IMapWith<Order>
     {
-        public int OrderStatusId { get; set; }
-        public Guid ExecutorId { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string ReceiptAddress { get; set; }
@@ -19,10 +17,6 @@ namespace ExpressDelivery.Application.Dto.OrderDto
         public void Mapping(Profile profile)
         {
             profile.CreateMap<CreateOrderDto, Order>()
-                   .ForPath(order => order.OrderStatusId,
-                       opt => opt.MapFrom(createOrderDto => createOrderDto.OrderStatusId))
-                   .ForPath(order => order.ExecutorId,
-                       opt => opt.MapFrom(createOrderDto => createOrderDto.ExecutorId))
                    .ForPath(order => order.UserId,
                        opt => opt.MapFrom(createOrderDto => createOrderDto.UserId))
                    .ForPath(order => order.Name,

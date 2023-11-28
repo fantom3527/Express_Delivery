@@ -20,7 +20,22 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<Cargo> Get(Guid id)
         {
-            return await _dbContext.Cargo.SingleOrDefaultAsync(cargo => cargo.Id == id) ?? throw new NotFoundException("Cargo not found", id);
+            return await _dbContext.Cargo.FindAsync(id) ?? throw new NotFoundException("Cargo not found", id);
+        }
+
+        public async Task AddOrder(Guid id, Guid orderId)
+        {
+            var addOrderToExecuter = await _dbContext.Cargo.FindAsync(id);
+
+            if (addOrderToExecuter == null)
+                return;
+
+            addOrderToExecuter.OrderId = orderId;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

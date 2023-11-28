@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<Executor> Get(Guid id)
         {
-            return await _dbContext.Executor.SingleOrDefaultAsync(executor => executor.Id == id) ?? throw new NotFoundException("Executor not found", id);
+            return await _dbContext.Executor.FindAsync(id) ?? throw new NotFoundException("Executor not found", id);
         }
 
         public async Task<Guid> Create(Executor executor)
@@ -43,7 +43,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task UpdateStatus(Guid id, int executorStatus)
         {
-            var executorToUpdateStatus = await _dbContext.Executor.SingleOrDefaultAsync(executor => executor.Id == id);
+            var executorToUpdateStatus = await _dbContext.Executor.FindAsync(id);
             if (executorToUpdateStatus == null)
                 return;
 
