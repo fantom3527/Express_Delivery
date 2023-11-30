@@ -41,7 +41,7 @@ namespace ExpressDelivery.Application.Repositories
         {
             await _dbContext.Order.AddAsync(order);
 
-            return order.Id; // TODO: проверить, и подумать, надо ли вообще что-то возвращать
+            return order.Id;
         }
 
         public async Task Update(Order order)

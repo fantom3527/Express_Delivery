@@ -108,7 +108,6 @@ namespace ExpressDelivery.Application.Services
         private async Task<bool> AllowEdit(int orderStatusId)
         {
             var orderStatus = await _repositoryManager.OrderStatusRepository.Get(orderStatusId);
-
             //TODO: Исправить на Enum
             return orderStatus.Code == "new";
         }
