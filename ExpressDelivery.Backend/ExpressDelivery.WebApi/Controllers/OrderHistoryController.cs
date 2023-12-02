@@ -1,5 +1,5 @@
-﻿using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.OrderHistoryDto;
+using ExpressDelivery.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,7 +22,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OrderHistory>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetOrderHistoryDto>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }
@@ -39,7 +39,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OrderHistory>>> GetAllByOrder([Required] Guid orderId)
+        public async Task<ActionResult<IEnumerable<GetOrderHistoryDto>>> GetAllByOrder([Required] Guid orderId)
         {
             return Ok(await Service.GetAllByOrder(orderId));
         }

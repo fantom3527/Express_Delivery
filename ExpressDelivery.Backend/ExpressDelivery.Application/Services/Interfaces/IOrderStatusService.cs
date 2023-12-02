@@ -1,9 +1,9 @@
-﻿using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.OrderStatusDto;
 
 namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IOrderStatusService
     {
-        public Task<IEnumerable<OrderStatus>> GetAll();
+        public Task<IEnumerable<GetOrderStatusDto>> GetAll();
     }
 }

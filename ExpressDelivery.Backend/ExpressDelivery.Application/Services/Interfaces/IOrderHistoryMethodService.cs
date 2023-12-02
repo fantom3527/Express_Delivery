@@ -1,9 +1,9 @@
-﻿using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.OrderHistoryMethodDto;
 
 namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IOrderHistoryMethodService
     {
-        public Task<IEnumerable<OrderHistoryMethod>> GetAll();
+        public Task<IEnumerable<GetOrderHistoryMethodDto>> GetAll();
     }
 }

@@ -1,24 +1,26 @@
-﻿using ExpressDelivery.Application.Repositories.Interfaces;
+﻿using AutoMapper;
+using ExpressDelivery.Application.Dto.CargoDto;
+using ExpressDelivery.Application.Repositories.Interfaces;
 using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Services
 {
     public class CargoService : ICargoService
     {
         private readonly ICargoRepository _cargoRepository;
+        private readonly IMapper _mapper;
 
-        public CargoService(ICargoRepository cargoRepository)
-            => _cargoRepository = cargoRepository;
+        public CargoService(ICargoRepository cargoRepository, IMapper mapper)
+            => (_cargoRepository, _mapper) = (cargoRepository, mapper);
 
-        public async Task<IEnumerable<Cargo>> GetAll()
+        public async Task<IEnumerable<GetCargoDto>> GetAll()
         {
-            return await _cargoRepository.GetAll();
+            return _mapper.Map<IEnumerable<GetCargoDto>>(await _cargoRepository.GetAll());
         }
 
-        public async Task<Cargo> Get(Guid id)
+        public async Task<GetCargoDto> Get(Guid id)
         {
-            return await _cargoRepository.Get(id);
+            return _mapper.Map<GetCargoDto>(await _cargoRepository.Get(id));
         }
 
         public async Task AddOrder(Guid id, Guid orderId)

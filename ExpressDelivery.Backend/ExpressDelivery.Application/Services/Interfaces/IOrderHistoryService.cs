@@ -1,10 +1,10 @@
-﻿using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.OrderHistoryDto;
 
 namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IOrderHistoryService
     {
-        public Task<IEnumerable<OrderHistory>> GetAll();
-        public Task<IEnumerable<OrderHistory>> GetAllByOrder(Guid orderId);
+        public Task<IEnumerable<GetOrderHistoryDto>> GetAll();
+        public Task<IEnumerable<GetOrderHistoryDto>> GetAllByOrder(Guid orderId);
     }
 }

@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using ExpressDelivery.Application.Common.Exception;
+﻿using ExpressDelivery.Application.Common.Exception;
 using ExpressDelivery.Application.Dto.ExecutorDto;
 using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,9 +12,6 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class ExecutorController : BaseController<IExecutorService>
     {
-        private readonly IMapper _mapper;
-        public ExecutorController(IMapper mapper) => _mapper = mapper;
-
         /// <summary>
         /// Gets all Executors.
         /// </summary>
@@ -28,7 +23,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Executor>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetExecutorDto>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }
@@ -45,7 +40,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Executor>> Get([Required] Guid id)
+        public async Task<ActionResult<GetExecutorDto>> Get([Required] Guid id)
         {
             try
             {
@@ -76,8 +71,7 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> Create([Required] CreateExecutorDto createExecutorDto)
         {
-            var command = _mapper.Map<Executor>(createExecutorDto);
-            return Ok(await Service.Create(command));
+            return Ok(await Service.Create(createExecutorDto));
         }
 
         /// <summary>
@@ -99,8 +93,7 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Update([FromBody][Required] UpdateExecutorDto updateExecutorDto)
         {
-            var command = _mapper.Map<Executor>(updateExecutorDto);
-            await Service.Update(command);
+            await Service.Update(updateExecutorDto);
 
             return NoContent();
         }

@@ -1,18 +1,21 @@
-﻿using ExpressDelivery.Application.Repositories.Interfaces;
+﻿using AutoMapper;
+using ExpressDelivery.Application.Dto.CargoTypeDto;
+using ExpressDelivery.Application.Repositories.Interfaces;
 using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Services
 {
     public class CargoTypeService : ICargoTypeService
     {
         private readonly ICargoTypeRepository _cargoTypeRepository;
+        private readonly IMapper _mapper;
 
-        public CargoTypeService(ICargoTypeRepository cargoTypeRepository)
-            => _cargoTypeRepository = cargoTypeRepository;
-        public async Task<IEnumerable<CargoType>> GetAll()
+        public CargoTypeService(ICargoTypeRepository cargoTypeRepository, IMapper mapper)
+            => (_cargoTypeRepository, _mapper) = (cargoTypeRepository, mapper);
+
+        public async Task<IEnumerable<GetCargoTypeDto>> GetAll()
         {
-            return await _cargoTypeRepository.GetAll();
+            return _mapper.Map<IEnumerable<GetCargoTypeDto>>(await _cargoTypeRepository.GetAll());
         }
     }
 }

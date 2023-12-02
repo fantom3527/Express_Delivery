@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using ExpressDelivery.Application.Common.Exception;
+﻿using ExpressDelivery.Application.Common.Exception;
 using ExpressDelivery.Application.Dto.OrderDto;
 using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,9 +11,6 @@ namespace ExpressDelivery.WebApi.Controllers
     [Route("api/{version:apiVersion}/[controller]")]
     public class OrderController : BaseController<IOrderService>
     {
-        private readonly IMapper _mapper;
-        public OrderController(IMapper mapper) => _mapper = mapper;
-
         /// <summary>
         /// Gets all Orders.
         /// </summary>
@@ -27,7 +22,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }
@@ -44,7 +39,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Order>> Get([Required] Guid id)
+        public async Task<ActionResult<GetOrderDto>> Get([Required] Guid id)
         {
             try
             {
@@ -68,7 +63,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("query-text/{queryText}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Order>>> GetQuery([Required] string queryText)
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetQuery([Required] string queryText)
         {
             return Ok(await Service.GetQuery(queryText));
         }
@@ -96,8 +91,7 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Guid>> Create([Required] CreateOrderDto createOrderDto)
         {
-            var command = _mapper.Map<Order>(createOrderDto);
-            return Ok(await Service.Create(command));
+            return Ok(await Service.Create(createOrderDto));
         }
 
         /// <summary>
@@ -123,8 +117,7 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Update([FromBody][Required] UpdateOrderDto updateOrderDto)
         {
-            var command = _mapper.Map<Order>(updateOrderDto);
-            await Service.Update(command);
+            await Service.Update(updateOrderDto);
 
             return NoContent();
         }

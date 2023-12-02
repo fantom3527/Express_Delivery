@@ -1,4 +1,6 @@
-﻿using ExpressDelivery.Application.Managers.Interfaces;
+﻿using AutoMapper;
+using ExpressDelivery.Application.Dto.OrderDto;
+using ExpressDelivery.Application.Managers.Interfaces;
 using ExpressDelivery.Application.Services.Interfaces;
 using ExpressDelivery.Domain;
 
@@ -7,41 +9,46 @@ namespace ExpressDelivery.Application.Services
     public class OrderService : IOrderService
     {
         private readonly IRepositoryManager _repositoryManager;
+        private readonly IMapper _mapper;
 
-        public OrderService(IRepositoryManager repositoryManager)
-            => _repositoryManager = repositoryManager;
+        public OrderService(IRepositoryManager repositoryManager, IMapper mapper)
+            => (_repositoryManager, _mapper) = (repositoryManager, mapper);
 
-        public async Task<IEnumerable<Order>> GetAll()
+        public async Task<IEnumerable<GetOrderDto>> GetAll()
         {
-            return await _repositoryManager.OrderRepository.GetAll();
+            var orders = await _repositoryManager.OrderRepository.GetAll();
+
+            return _mapper.Map<IEnumerable<GetOrderDto>>(orders);
         }
-        public async Task<Order> Get(Guid id)
+        public async Task<GetOrderDto> Get(Guid id)
         {
-            return await _repositoryManager.OrderRepository.Get(id);
-        }
-
-        public async Task<IEnumerable<Order>> GetQuery(string queryText)
-        {
-            return await _repositoryManager.OrderRepository.GetQuery(queryText);
+            return _mapper.Map<GetOrderDto>(await _repositoryManager.OrderRepository.Get(id));
         }
 
-        public async Task<Guid> Create(Order order)
+        public async Task<IEnumerable<GetOrderDto>> GetQuery(string queryText)
         {
-            await CreateOrder(order);
+            var orders = await _repositoryManager.OrderRepository.GetQuery(queryText);
+
+            return _mapper.Map<IEnumerable<GetOrderDto>>(orders);
+        }
+
+        public async Task<Guid> Create(CreateOrderDto order)
+        {
+            Guid id = await CreateOrder(_mapper.Map<Order>(order));
             //TODO: Исправить на Enum
-            await CreateOrderHistory(order.Id, "create");
+            await CreateOrderHistory(id, "create");
             await _repositoryManager.SaveChangesAsync();
 
-            return order.Id;
+            return id;
         }
 
-        public async Task Update(Order order)
+        public async Task Update(UpdateOrderDto order)
         {
             // TODO: Реализация пробрасывания своего исключения, если статус при обновлении данных не новый.
             if (!await AllowEdit(order.OrderStatusId))
                 return;
 
-            await _repositoryManager.OrderRepository.Update(order);
+            await _repositoryManager.OrderRepository.Update(_mapper.Map<Order>(order));
             //TODO: Исправить на Enum
             await CreateOrderHistory(order.Id, "edit");
             await _repositoryManager.SaveChangesAsync();
@@ -74,10 +81,11 @@ namespace ExpressDelivery.Application.Services
             await _repositoryManager.SaveChangesAsync();
         }
 
-        private async Task CreateOrder(Order order)
+        private async Task<Guid> CreateOrder(Order order)
         {
             order.OrderStatusId = await GetOrderStatusId("new");
-            await _repositoryManager.OrderRepository.Create(order);
+
+            return await _repositoryManager.OrderRepository.Create(order);
         }
 
         //TODO: Добавить добавление поля, кто сделал изменения: Исполнитель, заказчик или система (Их Id).

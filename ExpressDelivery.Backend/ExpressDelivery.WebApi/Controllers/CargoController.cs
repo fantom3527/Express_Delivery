@@ -1,6 +1,6 @@
 ﻿using ExpressDelivery.Application.Common.Exception;
+using ExpressDelivery.Application.Dto.CargoDto;
 using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,7 +22,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Cargo>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetCargoDto>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }
@@ -39,7 +39,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Cargo>> Get([Required] Guid id)
+        public async Task<ActionResult<GetCargoDto>> Get([Required] Guid id)
         {
             try
             {

@@ -1,9 +1,9 @@
-﻿using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.CargoTypeDto;
 
 namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface ICargoTypeService
     {
-        public Task<IEnumerable<CargoType>> GetAll();
+        public Task<IEnumerable<GetCargoTypeDto>> GetAll();
     }
 }

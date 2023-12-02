@@ -1,5 +1,5 @@
-﻿using ExpressDelivery.Application.Services.Interfaces;
-using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.OrderHistoryMethodDto;
+using ExpressDelivery.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpressDelivery.WebApi.Controllers
@@ -21,7 +21,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<OrderHistoryMethod>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetOrderHistoryMethodDto>>> GetAll()
         {
             return Ok(await Service.GetAll());
         }

@@ -1,10 +1,10 @@
-﻿using ExpressDelivery.Domain;
+﻿using ExpressDelivery.Application.Dto.UserDto;
 
 namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        public Task<IEnumerable<User>> GetAll();
-        public Task<User> Get(Guid id);
+        public Task<IEnumerable<GetUserDto>> GetAll();
+        public Task<GetUserDto> Get(Guid id);
     }
 }
