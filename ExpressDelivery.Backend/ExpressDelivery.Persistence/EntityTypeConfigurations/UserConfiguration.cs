@@ -7,13 +7,12 @@ namespace ExpressDelivery.Domain
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("User");
             builder.HasKey(user => user.Id);
             builder.HasIndex(user => user.Id).IsUnique();
-            builder.Property(user => user.Id).HasColumnName("Id");
-            builder.Property(user => user.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-            builder.Property(user => user.Description).HasColumnName("Description").HasMaxLength(500);
-            builder.Property(user => user.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(user => user.Id);
+            builder.Property(user => user.Name).IsRequired().HasMaxLength(50);
+            builder.Property(user => user.Description).HasMaxLength(500);
+            builder.Property(user => user.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

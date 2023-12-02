@@ -18,7 +18,8 @@ namespace ExpressDelivery.Persistence
                 if (isSQLiteProDbProvifer)
                 {
                     var connectionString = configuration["DbConnectionSQLlite"];
-                    options.UseSqlite(connectionString);
+                    options.UseSqlite(connectionString)
+                                .UseSnakeCaseNamingConvention();
                 }
                 else
                 {

@@ -8,21 +8,20 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderHistory> builder)
         {
-            builder.ToTable("OrderHistory");
             builder.HasKey(orderHistory => orderHistory.Id);
             builder.HasIndex(orderHistory => orderHistory.Id).IsUnique();
-            builder.Property(orderHistory => orderHistory.Id).HasColumnName("Id");
+            builder.Property(orderHistory => orderHistory.Id);
             builder.HasOne(orderHistory => orderHistory.Order)
                    .WithMany(order => order.OrderHistories)
                    .HasForeignKey(orderHistory => orderHistory.OrderId);
-            builder.Property(orderHistory => orderHistory.OrderId).HasColumnName("Order_Id").IsRequired();
+            builder.Property(orderHistory => orderHistory.OrderId).IsRequired();
 
             builder.HasOne(orderHistory => orderHistory.OrderHistoryMethod)
                    .WithMany()
                    .HasForeignKey(orderHistory => orderHistory.OrderHistoryMethodId);
-            builder.Property(orderHistory => orderHistory.OrderHistoryMethodId).HasColumnName("OrderHistoryMethod_Id").IsRequired();
-            builder.Property(orderHistory => orderHistory.Description).HasColumnName("Description").HasMaxLength(1000).IsRequired(false);
-            builder.Property(orderHistory => orderHistory.Ts).HasColumnName("TS").HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(orderHistory => orderHistory.OrderHistoryMethodId).IsRequired();
+            builder.Property(orderHistory => orderHistory.Description).HasMaxLength(1000).IsRequired(false);
+            builder.Property(orderHistory => orderHistory.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }
