@@ -9,8 +9,8 @@ namespace ExpressDelivery.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "Id", "Name", "Description" },
+                table: "user",
+                columns: new[] { "id", "name", "description" },
                 values: new object[,]
                 {
                     { Guid.Parse("A6BB65BB-5AC2-4AFA-8A28-2616F675B825"), "Костя Шипачев", "Программист" },
@@ -19,8 +19,8 @@ namespace ExpressDelivery.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cargo",
-                columns: new[] { "Id", "CargoType_Id", "Name", "Description" },
+                table: "cargo",
+                columns: new[] { "id", "cargo_type_id", "name", "description" },
                 values: new object[,]
                 {
                     { Guid.Parse("66945C5A-7506-4D3D-BE01-49867C4E0A04"), 1, "Машина", "Белая машина" },
@@ -29,8 +29,8 @@ namespace ExpressDelivery.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Executor",
-                columns: new[] { "Id", "Name", "Description", "ExecutorStatus_Id" },
+                table: "executor",
+                columns: new[] { "id", "name", "description", "executor_status_id" },
                 values: new object[,]
                 {
                    { Guid.Parse("A8D8532E-9DAA-4451-BE64-CC760E6A815C"), "Анна", "Опытный координатор по доставке грузов", 1 },
@@ -40,9 +40,9 @@ namespace ExpressDelivery.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Order",
-                columns: new[] { "Id", "User_Id", "OrderStatus_Id", "Executor_Id", "ReceiptAddress", "DeliveryAddress",
-                                 "Name", "Description", "ReceiptTime", "DeliveryTime" },
+                table: "order",
+                columns: new[] { "id", "user_id", "order_status_id", "executor_id", "receipt_address", "delivery_address",
+                                 "name", "description", "receipt_time", "delivery_time" },
                 values: new object[,]
                 {
                     { Guid.Parse("A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"), Guid.Parse("A6BB65BB-5AC2-4AFA-8A28-2616F675B825"), 3,
@@ -55,15 +55,15 @@ namespace ExpressDelivery.Persistence.Migrations
                 });
 
             migrationBuilder.UpdateData(
-                table: "Cargo",
-                keyColumn: "Id",
+                table: "cargo",
+                keyColumn: "id",
                 keyValue: Guid.Parse("07E0E4F3-6DCB-4F50-851C-D24731849451"),
-                column: "Order_Id",
+                column: "order_id",
                 value: Guid.Parse("A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"));
 
             migrationBuilder.InsertData(
-                table: "OrderHistory",
-                columns: new[] { "Id", "Order_Id", "OrderHistoryMethod_Id", "Description" },
+                table: "order_history",
+                columns: new[] { "id", "order_id", "order_history_method_id", "description" },
                 values: new object[,]
                 {
                    { Guid.NewGuid(), Guid.Parse("A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"), 1, null },

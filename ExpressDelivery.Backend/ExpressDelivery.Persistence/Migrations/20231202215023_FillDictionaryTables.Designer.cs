@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpressDelivery.Persistence.Migrations
 {
     [DbContext(typeof(ExpressDeliveryDbContext))]
-    [Migration("20231127045337_FillTestData")]
-    partial class FillTestData
+    [Migration("20231202215023_FillDictionaryTables")]
+    partial class FillDictionaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,44 +24,48 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<int>("CargoTypeId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("CargoType_Id");
+                        .HasColumnName("cargo_type_id");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("Order_Id");
+                        .HasColumnName("order_id");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_cargo");
 
-                    b.HasIndex("CargoTypeId");
+                    b.HasIndex("CargoTypeId")
+                        .HasDatabaseName("ix_cargo_cargo_type_id");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_cargo_id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_cargo_order_id");
 
-                    b.ToTable("Cargo", (string)null);
+                    b.ToTable("cargo", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.CargoType", b =>
@@ -69,36 +73,38 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Code");
+                        .HasColumnName("code");
 
                     b.Property<bool>("IsActual")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("IsActual");
+                        .HasColumnName("is_actual");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_cargo_type");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_cargo_type_id");
 
-                    b.ToTable("CargoType", (string)null);
+                    b.ToTable("cargo_type", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.Executor", b =>
@@ -106,38 +112,41 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<int>("ExecutorStatusId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("ExecutorStatus_Id");
+                        .HasColumnName("executor_status_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_executor");
 
-                    b.HasIndex("ExecutorStatusId");
+                    b.HasIndex("ExecutorStatusId")
+                        .HasDatabaseName("ix_executor_executor_status_id");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_executor_id");
 
-                    b.ToTable("Executor", (string)null);
+                    b.ToTable("executor", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.ExecutorStatus", b =>
@@ -145,36 +154,38 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Code");
+                        .HasColumnName("code");
 
                     b.Property<bool>("IsActual")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("IsActual");
+                        .HasColumnName("is_actual");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_executor_status");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_executor_status_id");
 
-                    b.ToTable("ExecutorStatus", (string)null);
+                    b.ToTable("executor_status", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.Order", b =>
@@ -182,70 +193,75 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("DeliveryAddress")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("DeliveryAddress");
+                        .HasColumnName("delivery_address");
 
                     b.Property<DateTime>("DeliveryTime")
                         .HasColumnType("TEXT")
-                        .HasColumnName("DeliveryTime");
+                        .HasColumnName("delivery_time");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<Guid?>("ExecutorId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("Executor_Id");
+                        .HasColumnName("executor_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<int>("OrderStatusId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("OrderStatus_Id");
+                        .HasColumnName("order_status_id");
 
                     b.Property<string>("ReceiptAddress")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("ReceiptAddress");
+                        .HasColumnName("receipt_address");
 
                     b.Property<DateTime>("ReceiptTime")
                         .HasColumnType("TEXT")
-                        .HasColumnName("ReceiptTime");
+                        .HasColumnName("receipt_time");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("User_Id");
+                        .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_order");
 
-                    b.HasIndex("ExecutorId");
+                    b.HasIndex("ExecutorId")
+                        .HasDatabaseName("ix_order_executor_id");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_order_id");
 
-                    b.HasIndex("OrderStatusId");
+                    b.HasIndex("OrderStatusId")
+                        .HasDatabaseName("ix_order_order_status_id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_order_user_id");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("order", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.OrderHistory", b =>
@@ -253,37 +269,41 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
                         .HasMaxLength(1000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<int>("OrderHistoryMethodId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("OrderHistoryMethod_Id");
+                        .HasColumnName("order_history_method_id");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("Order_Id");
+                        .HasColumnName("order_id");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_order_history");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_order_history_id");
 
-                    b.HasIndex("OrderHistoryMethodId");
+                    b.HasIndex("OrderHistoryMethodId")
+                        .HasDatabaseName("ix_order_history_order_history_method_id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_order_history_order_id");
 
-                    b.ToTable("OrderHistory", (string)null);
+                    b.ToTable("order_history", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.OrderHistoryMethod", b =>
@@ -291,36 +311,38 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Code");
+                        .HasColumnName("code");
 
                     b.Property<bool>("IsActual")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("IsActual");
+                        .HasColumnName("is_actual");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_order_history_method");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_order_history_method_id");
 
-                    b.ToTable("OrderHistoryMethod", (string)null);
+                    b.ToTable("order_history_method", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.OrderStatus", b =>
@@ -328,36 +350,38 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Code");
+                        .HasColumnName("code");
 
                     b.Property<bool>("IsActual")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("IsActual");
+                        .HasColumnName("is_actual");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_order_status");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_order_status_id");
 
-                    b.ToTable("OrderStatus", (string)null);
+                    b.ToTable("order_status", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.User", b =>
@@ -365,32 +389,34 @@ namespace ExpressDelivery.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT")
-                        .HasColumnName("Name");
+                        .HasColumnName("name");
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasColumnName("TS")
+                        .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_user");
 
                     b.HasIndex("Id")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_user_id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("user", (string)null);
                 });
 
             modelBuilder.Entity("ExpressDelivery.Domain.Cargo", b =>
@@ -399,11 +425,13 @@ namespace ExpressDelivery.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("CargoTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_cargo_cargo_type_cargo_type_id");
 
                     b.HasOne("ExpressDelivery.Domain.Order", "Order")
                         .WithMany("Cargos")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .HasConstraintName("fk_cargo_order_order_id");
 
                     b.Navigation("CargoType");
 
@@ -416,7 +444,8 @@ namespace ExpressDelivery.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ExecutorStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_executor_executor_status_executor_status_id");
 
                     b.Navigation("ExecutorStatus");
                 });
@@ -425,19 +454,22 @@ namespace ExpressDelivery.Persistence.Migrations
                 {
                     b.HasOne("ExpressDelivery.Domain.Executor", "Executor")
                         .WithMany("Orders")
-                        .HasForeignKey("ExecutorId");
+                        .HasForeignKey("ExecutorId")
+                        .HasConstraintName("fk_order_executor_executor_id");
 
                     b.HasOne("ExpressDelivery.Domain.OrderStatus", "OrderStatus")
                         .WithMany()
                         .HasForeignKey("OrderStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_order_order_status_order_status_id");
 
                     b.HasOne("ExpressDelivery.Domain.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_order_user_user_id");
 
                     b.Navigation("Executor");
 
@@ -452,13 +484,15 @@ namespace ExpressDelivery.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("OrderHistoryMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_order_history_order_history_method_order_history_method_id");
 
                     b.HasOne("ExpressDelivery.Domain.Order", "Order")
                         .WithMany("OrderHistories")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_order_history_order_order_id");
 
                     b.Navigation("Order");
 
