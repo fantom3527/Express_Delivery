@@ -14,7 +14,7 @@ namespace ExpressDelivery.Persistence.Migrations
                 values: new object[,]
                 {
                     { "Ожидает заказа", "wait", true },
-                    { "Выполняет заказ", "submitted", true },
+                    { "Выполняет заказ", "executesorder", true },
                     { "Назначается заказ", "orderselection", true }
                 });
 

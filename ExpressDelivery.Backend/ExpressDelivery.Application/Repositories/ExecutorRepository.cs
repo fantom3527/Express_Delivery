@@ -41,13 +41,13 @@ namespace ExpressDelivery.Application.Repositories
             }
         }
 
-        public async Task UpdateStatus(Guid id, int executorStatus)
+        public async Task UpdateStatus(Guid id, int executorStatusId)
         {
             var executorToUpdateStatus = await _dbContext.Executor.FindAsync(id);
             if (executorToUpdateStatus == null)
                 return;
 
-            executorToUpdateStatus.ExecutorStatusId = executorStatus;
+            executorToUpdateStatus.ExecutorStatusId = executorStatusId;
         }
 
         public async Task Delete(Guid id)

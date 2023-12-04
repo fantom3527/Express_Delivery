@@ -141,7 +141,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPut("status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int orderStatusId, [FromQuery] string descriptionUpdateStatus)
+        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int orderStatusId, [FromQuery] string? descriptionUpdateStatus = null)
         {
             await Service.UpdateStatus(id, orderStatusId, descriptionUpdateStatus);
 

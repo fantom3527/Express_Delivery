@@ -57,7 +57,6 @@ namespace ExpressDelivery.Application.Services
         public async Task UpdateStatus(Guid id, int orderStatusId, string descriptionUpdateStatus)
         {
             await _repositoryManager.OrderRepository.UpdateStatus(id, orderStatusId);
-            // TODO: Проверить как будет без описание и с описанием.
             //TODO: Исправить на Enum
             await CreateOrderHistory(id, "updatestatus", descriptionUpdateStatus);
             await _repositoryManager.SaveChangesAsync();
@@ -77,7 +76,7 @@ namespace ExpressDelivery.Application.Services
             //TODO: Исправить на Enum
             await _repositoryManager.OrderRepository.UpdateStatus(orderId, await GetOrderStatusId("submitted"));
             await _repositoryManager.ExecutorRepository.UpdateStatus(executorId, await GetExecutorStatusId("executesorder"));
-            await CreateOrderHistory(orderId, "assignmentexecutor");
+            await CreateOrderHistory(orderId, "submittedexecution");
             await _repositoryManager.SaveChangesAsync();
         }
 
@@ -89,13 +88,13 @@ namespace ExpressDelivery.Application.Services
         }
 
         //TODO: Добавить добавление поля, кто сделал изменения: Исполнитель, заказчик или система (Их Id).
-        private async Task CreateOrderHistory(Guid orderId, string orderHistoryMethodCode, string OrderHistoryDescription = "")
+        private async Task CreateOrderHistory(Guid orderId, string orderHistoryMethodCode, string OrderHistoryDescription = null)
         {
             //TODO: Добавить проверку, если нет в списке нужных методов по коду
             int orderHistoryMethodid = await _repositoryManager.OrderHistoryMethodRepository.GetId(orderHistoryMethodCode);
             var orderHistory = new OrderHistory
             {
-                Id = orderId,
+                OrderId = orderId,
                 OrderHistoryMethodId = orderHistoryMethodid,
                 Description = OrderHistoryDescription
             };
