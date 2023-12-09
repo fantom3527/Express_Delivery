@@ -32,7 +32,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task Update(Executor executor, CancellationToken cancellationToken = default)
         {
-            var executorToUpdate = await _dbContext.Executor.FindAsync(new object[] { executor.Id }, cancellationToken);
+            var executorToUpdate = await _dbContext.Executor.FindAsync(new object[] { executor.Id }, cancellationToken) ?? throw new NotFoundException("Executor not found", executor.Id);
             if (executorToUpdate != null)
             {
                 executorToUpdate.Name = executor.Name;
@@ -43,7 +43,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task UpdateStatus(Guid id, int executorStatusId, CancellationToken cancellationToken = default)
         {
-            var executorToUpdateStatus = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken);
+            var executorToUpdateStatus = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Executor not found", id);
             if (executorToUpdateStatus == null)
                 return;
 
@@ -52,7 +52,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task Delete(Guid id, CancellationToken cancellationToken = default)
         {
-            var executorToDelete = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken);
+            var executorToDelete = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Executor not found", id);
             if (executorToDelete != null)
             {
                 _dbContext.Executor.Remove(executorToDelete);

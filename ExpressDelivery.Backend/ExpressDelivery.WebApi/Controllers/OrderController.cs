@@ -43,14 +43,7 @@ namespace ExpressDelivery.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<GetOrderDto>> Get([Required] Guid id, CancellationToken cancellationToken)
         {
-            try
-            {
-                return Ok(await Service.Get(id, cancellationToken));
-            }
-            catch (NotFoundException)
-            {
-                return NotFound();
-            }
+            return Ok(await Service.Get(id, cancellationToken));
         }
 
         /// <summary>

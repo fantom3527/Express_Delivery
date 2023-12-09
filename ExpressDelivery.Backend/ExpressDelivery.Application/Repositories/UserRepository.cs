@@ -20,7 +20,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task<User> Get(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.User.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("user not found", id);
+            return await _dbContext.User.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("User not found", id);
         }
     }
 }

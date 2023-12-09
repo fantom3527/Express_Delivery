@@ -46,7 +46,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task Update(Order order, CancellationToken cancellationToken = default)
         {
-            var orderToUpdate = await _dbContext.Order.FindAsync(new object[] { order.Id }, cancellationToken);
+            var orderToUpdate = await _dbContext.Order.FindAsync(new object[] { order.Id }, cancellationToken) ?? throw new NotFoundException("Order not found", order.Id);
             if (orderToUpdate == null)
                 return;
 
@@ -60,7 +60,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task UpdateStatus(Guid id, int orderStatusId, CancellationToken cancellationToken = default)
         {
-            var orderToUpdateStatus = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken);
+            var orderToUpdateStatus = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Order not found", id);
             if (orderToUpdateStatus == null)
                 return;
 
@@ -69,7 +69,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task Delete(Guid id, int orderStatusDeleteId, CancellationToken cancellationToken = default)
         {
-            var orderToDelete = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken);
+            var orderToDelete = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Order not found", id);
             if (orderToDelete == null)
                 return;
 
@@ -78,7 +78,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task AddExecutor(Guid id, Guid executorId, CancellationToken cancellationToken = default)
         {
-            var addExecutorToOrder = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken);
+            var addExecutorToOrder = await _dbContext.Order.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Order not found", id);
             if (addExecutorToOrder == null)
                 return;
 

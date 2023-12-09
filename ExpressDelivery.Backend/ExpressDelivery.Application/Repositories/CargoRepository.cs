@@ -25,7 +25,7 @@ namespace ExpressDelivery.Application.Repositories
 
         public async Task AddOrder(Guid id, Guid orderId, CancellationToken cancellationToken = default)
         {
-            var addOrderToExecuter = await _dbContext.Cargo.FindAsync(new object[] { id }, cancellationToken);
+            var addOrderToExecuter = await _dbContext.Cargo.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Cargo not found", id); ;
 
             if (addOrderToExecuter == null)
                 return;
