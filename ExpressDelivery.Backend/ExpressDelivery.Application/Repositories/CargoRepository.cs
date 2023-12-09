@@ -13,19 +13,19 @@ namespace ExpressDelivery.Application.Repositories
         public CargoRepository(IExpressDeliveryDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<IEnumerable<Cargo>> GetAll()
+        public async Task<IEnumerable<Cargo>> GetAll(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Cargo.ToListAsync();
+            return await _dbContext.Cargo.ToListAsync(cancellationToken);
         }
 
-        public async Task<Cargo> Get(Guid id)
+        public async Task<Cargo> Get(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Cargo.FindAsync(id) ?? throw new NotFoundException("Cargo not found", id);
+            return await _dbContext.Cargo.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Cargo not found", id);
         }
 
-        public async Task AddOrder(Guid id, Guid orderId)
+        public async Task AddOrder(Guid id, Guid orderId, CancellationToken cancellationToken = default)
         {
-            var addOrderToExecuter = await _dbContext.Cargo.FindAsync(id);
+            var addOrderToExecuter = await _dbContext.Cargo.FindAsync(new object[] { id }, cancellationToken);
 
             if (addOrderToExecuter == null)
                 return;
@@ -33,9 +33,9 @@ namespace ExpressDelivery.Application.Repositories
             addOrderToExecuter.OrderId = orderId;
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

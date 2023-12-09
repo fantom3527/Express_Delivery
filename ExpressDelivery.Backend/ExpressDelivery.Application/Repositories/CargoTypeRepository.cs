@@ -12,9 +12,9 @@ namespace ExpressDelivery.Application.Repositories
         public CargoTypeRepository(IExpressDeliveryDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<IEnumerable<CargoType>> GetAll()
+        public async Task<IEnumerable<CargoType>> GetAll(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.CargoType.ToListAsync();
+            return await _dbContext.CargoType.ToListAsync(cancellationToken);
         }
     }
 }

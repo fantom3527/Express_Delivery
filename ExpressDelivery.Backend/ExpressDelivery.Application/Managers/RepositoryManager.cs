@@ -39,9 +39,9 @@ namespace ExpressDelivery.Application.Managers
         public IOrderStatusRepository OrderStatusRepository { get; }
         public IOrderHistoryRepository OrderHistoryRepository { get; }
         public IOrderHistoryMethodRepository OrderHistoryMethodRepository { get; }
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

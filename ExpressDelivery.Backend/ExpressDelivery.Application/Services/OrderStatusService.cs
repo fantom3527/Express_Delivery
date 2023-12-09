@@ -12,9 +12,9 @@ namespace ExpressDelivery.Application.Services
 
         public OrderStatusService(IOrderStatusRepository orderStatusRepository, IMapper mapper)
             => (_orderStatusRepository, _mapper) = (orderStatusRepository, mapper);
-        public async Task<IEnumerable<GetOrderStatusDto>> GetAll()
+        public async Task<IEnumerable<GetOrderStatusDto>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetOrderStatusDto>>(await _orderStatusRepository.GetAll());
+            return _mapper.Map<IEnumerable<GetOrderStatusDto>>(await _orderStatusRepository.GetAll(cancellationToken));
         }
     }
 }

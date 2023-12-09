@@ -4,6 +4,6 @@ namespace ExpressDelivery.Application.Repositories.Interfaces
 {
     public interface ICargoTypeRepository
     {
-        public Task<IEnumerable<CargoType>> GetAll();
+        public Task<IEnumerable<CargoType>> GetAll(CancellationToken cancellationToken = default);
     }
 }

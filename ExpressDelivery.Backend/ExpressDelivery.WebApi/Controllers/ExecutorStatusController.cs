@@ -13,6 +13,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Gets all ExecutorStatuses.
         /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// GET /ExecutorStatus
@@ -21,9 +22,9 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<GetExecutorStatusDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetExecutorStatusDto>>> GetAll(CancellationToken cancellationToken)
         {
-            return Ok(await Service.GetAll());
+            return Ok(await Service.GetAll(cancellationToken));
         }
     }
 }

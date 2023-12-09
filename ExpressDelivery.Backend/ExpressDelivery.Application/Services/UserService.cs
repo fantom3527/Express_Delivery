@@ -13,14 +13,14 @@ namespace ExpressDelivery.Application.Services
         public UserService(IUserRepository userRepository, IMapper mapper)
             => (_userRepository, _mapper) = (userRepository, mapper);
 
-        public async Task<IEnumerable<GetUserDto>> GetAll()
+        public async Task<IEnumerable<GetUserDto>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetUserDto>>(await _userRepository.GetAll());
+            return _mapper.Map<IEnumerable<GetUserDto>>(await _userRepository.GetAll(cancellationToken));
         }
 
-        public async Task<GetUserDto> Get(Guid id)
+        public async Task<GetUserDto> Get(Guid id, CancellationToken cancellationToken)
         {
-            return _mapper.Map<GetUserDto>(await _userRepository.Get(id));
+            return _mapper.Map<GetUserDto>(await _userRepository.Get(id, cancellationToken));
         }
     }
 }

@@ -13,19 +13,19 @@ namespace ExpressDelivery.Application.Repositories
         public OrderStatusRepository(IExpressDeliveryDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<IEnumerable<OrderStatus>> GetAll()
+        public async Task<IEnumerable<OrderStatus>> GetAll(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.OrderStatus.ToListAsync();
+            return await _dbContext.OrderStatus.ToListAsync(cancellationToken);
         }
 
-        public async Task<OrderStatus> Get(int id)
+        public async Task<OrderStatus> Get(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.OrderStatus.FindAsync(id) ?? throw new NotFoundException("OrderStatus not found", id);
+            return await _dbContext.OrderStatus.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("OrderStatus not found", id);
         }
 
-        public async Task<int> GetIdByCode(string code)
+        public async Task<int> GetIdByCode(string code, CancellationToken cancellationToken = default)
         {
-            var orderStatus = await _dbContext.OrderStatus.SingleOrDefaultAsync(orderStatus => orderStatus.Code == code);
+            var orderStatus = await _dbContext.OrderStatus.SingleOrDefaultAsync(orderStatus => orderStatus.Code == code, cancellationToken);
 
             return orderStatus?.Id ?? 0;
         }

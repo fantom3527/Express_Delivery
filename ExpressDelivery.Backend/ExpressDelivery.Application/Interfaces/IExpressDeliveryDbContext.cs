@@ -15,6 +15,6 @@ namespace ExpressDelivery.Application.Interfaces
         public DbSet<Cargo> Cargo { get; set; }
         public DbSet<CargoType> CargoType { get; set; }
 
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

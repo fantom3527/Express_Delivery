@@ -4,6 +4,6 @@ namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IOrderHistoryMethodService
     {
-        public Task<IEnumerable<GetOrderHistoryMethodDto>> GetAll();
+        public Task<IEnumerable<GetOrderHistoryMethodDto>> GetAll(CancellationToken cancellationToken);
     }
 }

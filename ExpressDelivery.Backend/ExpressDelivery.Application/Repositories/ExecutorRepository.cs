@@ -13,26 +13,26 @@ namespace ExpressDelivery.Application.Repositories
         public ExecutorRepository(IExpressDeliveryDbContext dbContext)
             => _dbContext = dbContext;
 
-        public async Task<IEnumerable<Executor>> GetAll()
+        public async Task<IEnumerable<Executor>> GetAll(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Executor.ToListAsync();
+            return await _dbContext.Executor.ToListAsync(cancellationToken);
         }
 
-        public async Task<Executor> Get(Guid id)
+        public async Task<Executor> Get(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Executor.FindAsync(id) ?? throw new NotFoundException("Executor not found", id);
+            return await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken) ?? throw new NotFoundException("Executor not found", id);
         }
 
-        public async Task<Guid> Create(Executor executor)
+        public async Task<Guid> Create(Executor executor, CancellationToken cancellationToken = default)
         {
-            await _dbContext.Executor.AddAsync(executor);
+            await _dbContext.Executor.AddAsync(executor, cancellationToken);
 
             return executor.Id; // TODO: проверить, и подумать, надо ли вообще что-то возвращать
         }
 
-        public async Task Update(Executor executor)
+        public async Task Update(Executor executor, CancellationToken cancellationToken = default)
         {
-            var executorToUpdate = await _dbContext.Executor.FindAsync(executor.Id);
+            var executorToUpdate = await _dbContext.Executor.FindAsync(new object[] { executor.Id }, cancellationToken);
             if (executorToUpdate != null)
             {
                 executorToUpdate.Name = executor.Name;
@@ -41,27 +41,27 @@ namespace ExpressDelivery.Application.Repositories
             }
         }
 
-        public async Task UpdateStatus(Guid id, int executorStatusId)
+        public async Task UpdateStatus(Guid id, int executorStatusId, CancellationToken cancellationToken = default)
         {
-            var executorToUpdateStatus = await _dbContext.Executor.FindAsync(id);
+            var executorToUpdateStatus = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken);
             if (executorToUpdateStatus == null)
                 return;
 
             executorToUpdateStatus.ExecutorStatusId = executorStatusId;
         }
 
-        public async Task Delete(Guid id)
+        public async Task Delete(Guid id, CancellationToken cancellationToken = default)
         {
-            var executorToDelete = await _dbContext.Executor.FindAsync(id);
+            var executorToDelete = await _dbContext.Executor.FindAsync(new object[] { id }, cancellationToken);
             if (executorToDelete != null)
             {
                 _dbContext.Executor.Remove(executorToDelete);
             }
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

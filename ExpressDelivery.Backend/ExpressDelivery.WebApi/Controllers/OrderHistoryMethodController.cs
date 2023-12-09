@@ -13,6 +13,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Gets all OrderHistoryMethods.
         /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// GET /OrderHistoryMethod
@@ -21,9 +22,9 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<GetOrderHistoryMethodDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetOrderHistoryMethodDto>>> GetAll(CancellationToken cancellationToken)
         {
-            return Ok(await Service.GetAll());
+            return Ok(await Service.GetAll(cancellationToken));
         }
     }
 }

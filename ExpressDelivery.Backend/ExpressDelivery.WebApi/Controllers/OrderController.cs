@@ -14,6 +14,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Gets all Orders.
         /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// GET /Order
@@ -22,15 +23,16 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAll(CancellationToken cancellationToken)
         {
-            return Ok(await Service.GetAll());
+            return Ok(await Service.GetAll(cancellationToken));
         }
 
         /// <summary>
         /// Gets Order by id.
         /// </summary>
         /// <param name="id">Order id (guid).</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// GET /Order/A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568
@@ -39,11 +41,11 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<GetOrderDto>> Get([Required] Guid id)
+        public async Task<ActionResult<GetOrderDto>> Get([Required] Guid id, CancellationToken cancellationToken)
         {
             try
             {
-                return Ok(await Service.Get(id));
+                return Ok(await Service.Get(id, cancellationToken));
             }
             catch (NotFoundException)
             {
@@ -55,6 +57,7 @@ namespace ExpressDelivery.WebApi.Controllers
         /// Gets Order by query.
         /// </summary>
         /// <param name="queryText">query Text (string).</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// GET /Order/query-text/new
@@ -63,14 +66,16 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet("query-text/{queryText}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetQuery([Required] string queryText)
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetQuery([Required] string queryText, CancellationToken cancellationToken)
         {
-            return Ok(await Service.GetQuery(queryText));
+            return Ok(await Service.GetQuery(queryText, cancellationToken));
         }
 
         /// <summary>
         /// Creates the Order.
         /// </summary>
+        /// <param name="createOrderDto">CreateOrderDto object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// POST /Order
@@ -84,19 +89,20 @@ namespace ExpressDelivery.WebApi.Controllers
         ///     description: "Order description"
         /// }
         /// </remarks>
-        /// <param name="createOrderDto">CreateOrderDto object.</param>
         /// <returns>Returns id (guid).</returns>
         /// <response code="200">Success</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Guid>> Create([Required] CreateOrderDto createOrderDto)
+        public async Task<ActionResult<Guid>> Create([Required] CreateOrderDto createOrderDto, CancellationToken cancellationToken)
         {
-            return Ok(await Service.Create(createOrderDto));
+            return Ok(await Service.Create(createOrderDto, cancellationToken));
         }
 
         /// <summary>
         /// Updates the Order.
         /// </summary>
+        /// <param name="updateOrderDto">UpdateOrderDto object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// Sample request:
         /// <remarks>
         /// PUT /Order
@@ -110,14 +116,13 @@ namespace ExpressDelivery.WebApi.Controllers
         ///     description: "Order description"
         /// }
         /// </remarks>
-        /// <param name="updateOrderDto">UpdateOrderDto object.</param>
         /// <returns>Return NoContent.</returns>
         /// <response code="200">Success</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Update([FromBody][Required] UpdateOrderDto updateOrderDto)
+        public async Task<ActionResult> Update([FromBody][Required] UpdateOrderDto updateOrderDto, CancellationToken cancellationToken)
         {
-            await Service.Update(updateOrderDto);
+            await Service.Update(updateOrderDto, cancellationToken);
 
             return NoContent();
         }
@@ -125,6 +130,10 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Changes status the Order.
         /// </summary>
+        /// <param name="id">Order id.</param>
+        /// <param name="orderStatusId">Order status id.</param>
+        /// <param name="descriptionUpdateStatus">Description update Status for order history.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// Sample request:
         /// <remarks>
         /// PUT /Order/status
@@ -134,16 +143,13 @@ namespace ExpressDelivery.WebApi.Controllers
         ///     descriptionUpdateStatus: "Description Update Status"
         /// }
         /// </remarks>
-        /// <param name="id">Order id.</param>
-        /// <param name="orderStatusId">Order status id.</param>
-        /// <param name="descriptionUpdateStatus">Description update Status for order history.</param>
         /// <returns>Return NoContent.</returns>
         /// <response code="200">Success</response>
         [HttpPut("status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int orderStatusId, [FromQuery] string? descriptionUpdateStatus = null)
+        public async Task<ActionResult> UpdateStatus([FromQuery][Required] Guid id, [FromQuery][Required] int orderStatusId, CancellationToken cancellationToken, [FromQuery] string? descriptionUpdateStatus = null)
         {
-            await Service.UpdateStatus(id, orderStatusId, descriptionUpdateStatus);
+            await Service.UpdateStatus(id, orderStatusId, descriptionUpdateStatus, cancellationToken);
 
             return NoContent();
         }
@@ -151,6 +157,9 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Add Executor to Order".
         /// </summary>
+        /// <param name="id">Order id.</param>
+        /// <param name="executorId">Executor id.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// Sample request:
         /// <remarks>
         /// PUT /Order/add-executor
@@ -159,15 +168,13 @@ namespace ExpressDelivery.WebApi.Controllers
         ///     executorId: "A56E0344-8120-4543-91D0-0726CA1DF416"
         /// }
         /// </remarks>
-        /// <param name="id">Order id.</param>
-        /// <param name="executorId">Executor id.</param>
         /// <returns>Return NoContent.</returns>
         /// <response code="200">Success</response>
         [HttpPut("add-executor")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> AddExecutor([FromQuery][Required] Guid id, [FromQuery][Required] Guid executorId)
+        public async Task<ActionResult> AddExecutor([FromQuery][Required] Guid id, [FromQuery][Required] Guid executorId, CancellationToken cancellationToken)
         {
-            await Service.AddExecutor(id, executorId);
+            await Service.AddExecutor(id, executorId, cancellationToken);
 
             return NoContent();
         }
@@ -175,18 +182,19 @@ namespace ExpressDelivery.WebApi.Controllers
         /// <summary>
         /// Deletes the Order by id.
         /// </summary>
+        /// <param name="id">Order id (guid).</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <remarks>
         /// Sample request:
         /// DELETE /Order/A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568
         /// </remarks>
-        /// <param name="id">Order id (guid).</param>
         /// <returns>Returns NoContent.</returns>
         /// <response code="200">Success</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Delete([Required] Guid id)
+        public async Task<ActionResult> Delete([Required] Guid id, CancellationToken cancellationToken)
         {
-            await Service.Delete(id);
+            await Service.Delete(id, cancellationToken);
 
             return NoContent();
         }

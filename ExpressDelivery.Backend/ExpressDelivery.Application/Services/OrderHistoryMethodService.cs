@@ -13,9 +13,9 @@ namespace ExpressDelivery.Application.Services
         public OrderHistoryMethodService(IOrderHistoryMethodRepository orderHistoryMethodRepository, IMapper mapper)
             => (_orderHistoryMethodRepository, _mapper) = (orderHistoryMethodRepository, mapper);
 
-        public async Task<IEnumerable<GetOrderHistoryMethodDto>> GetAll()
+        public async Task<IEnumerable<GetOrderHistoryMethodDto>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetOrderHistoryMethodDto>>(await _orderHistoryMethodRepository.GetAll());
+            return _mapper.Map<IEnumerable<GetOrderHistoryMethodDto>>(await _orderHistoryMethodRepository.GetAll(cancellationToken));
         }
     }
 }

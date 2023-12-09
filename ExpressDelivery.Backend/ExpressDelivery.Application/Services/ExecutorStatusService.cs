@@ -13,9 +13,9 @@ namespace ExpressDelivery.Application.Services
         public ExecutorStatusService(IExecutorStatusRepository executorStatusRepository, IMapper mapper)
             => (_executorStatusRepository, _mapper) = (executorStatusRepository, mapper);
 
-        public async Task<IEnumerable<GetExecutorStatusDto>> GetAll()
+        public async Task<IEnumerable<GetExecutorStatusDto>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetExecutorStatusDto>>(await _executorStatusRepository.GetAll());
+            return _mapper.Map<IEnumerable<GetExecutorStatusDto>>(await _executorStatusRepository.GetAll(cancellationToken));
         }
     }
 }

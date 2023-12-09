@@ -1,4 +1,5 @@
 ﻿using ExpressDelivery.Application.Common.Exception;
+using Serilog;
 using System.Net;
 using System.Text.Json;
 
@@ -33,6 +34,8 @@ namespace ExpressDelivery.WebApi.Middleware
         {
             var code = HttpStatusCode.InternalServerError;
             var result = string.Empty;
+            context.Response.ContentType = "application/json";
+
             switch (exception)
             {
                 case FluentValidation.ValidationException validationException:
@@ -41,9 +44,13 @@ namespace ExpressDelivery.WebApi.Middleware
                     break;
                 case NotFoundException:
                     code = HttpStatusCode.NotFound;
+                    Log.Information("Not Found");
                     break;
+                case OperationCanceledException or TaskCanceledException:
+                    context.Response.StatusCode = (int)HttpStatusCode.NoContent;
+                    Log.Information("Task cancelled");
+                    return Task.CompletedTask;
             }
-            context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
 
             if (result == string.Empty)

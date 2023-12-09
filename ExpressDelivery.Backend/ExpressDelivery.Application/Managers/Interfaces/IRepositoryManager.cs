@@ -1,5 +1,4 @@
-﻿using ExpressDelivery.Application.Interfaces;
-using ExpressDelivery.Application.Repositories.Interfaces;
+﻿using ExpressDelivery.Application.Repositories.Interfaces;
 
 namespace ExpressDelivery.Application.Managers.Interfaces
 {
@@ -12,6 +11,6 @@ namespace ExpressDelivery.Application.Managers.Interfaces
         public IOrderHistoryRepository OrderHistoryRepository { get; }
         public IOrderHistoryMethodRepository OrderHistoryMethodRepository { get; }
 
-        public Task SaveChangesAsync();
+        public Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

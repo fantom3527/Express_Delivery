@@ -13,14 +13,14 @@ namespace ExpressDelivery.Application.Services
         public OrderHistoryService(IOrderHistoryRepository orderHistoryRepository, IMapper mapper)
             => (_orderHistoryRepository, _mapper) = (orderHistoryRepository, mapper);
 
-        public async Task<IEnumerable<GetOrderHistoryDto>> GetAll()
+        public async Task<IEnumerable<GetOrderHistoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetOrderHistoryDto>>(await _orderHistoryRepository.GetAll());
+            return _mapper.Map<IEnumerable<GetOrderHistoryDto>>(await _orderHistoryRepository.GetAll(cancellationToken));
         }
 
-        public async Task<IEnumerable<GetOrderHistoryDto>> GetAllByOrder(Guid orderId)
+        public async Task<IEnumerable<GetOrderHistoryDto>> GetAllByOrder(Guid orderId, CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<GetOrderHistoryDto>>(await _orderHistoryRepository.GetAllByOrder(orderId));
+            return _mapper.Map<IEnumerable<GetOrderHistoryDto>>(await _orderHistoryRepository.GetAllByOrder(orderId, cancellationToken));
         }
     }
 }

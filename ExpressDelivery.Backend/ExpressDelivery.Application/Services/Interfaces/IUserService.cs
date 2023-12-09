@@ -4,7 +4,7 @@ namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        public Task<IEnumerable<GetUserDto>> GetAll();
-        public Task<GetUserDto> Get(Guid id);
+        public Task<IEnumerable<GetUserDto>> GetAll(CancellationToken cancellationToken);
+        public Task<GetUserDto> Get(Guid id, CancellationToken cancellationToken);
     }
 }

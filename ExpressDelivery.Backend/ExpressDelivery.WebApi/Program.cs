@@ -9,6 +9,7 @@ namespace ExpressDelivery.WebApi
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration().MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+                                      .WriteTo.Console()
                                       .WriteTo.File("LogFiles/ExpressDelivery-.txt", rollingInterval: RollingInterval.Day)
                                       .CreateLogger();
 

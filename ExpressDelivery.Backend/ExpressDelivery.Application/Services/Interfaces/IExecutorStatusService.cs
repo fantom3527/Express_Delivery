@@ -4,6 +4,6 @@ namespace ExpressDelivery.Application.Services.Interfaces
 {
     public interface IExecutorStatusService
     {
-        public Task<IEnumerable<GetExecutorStatusDto>> GetAll();
+        public Task<IEnumerable<GetExecutorStatusDto>> GetAll(CancellationToken cancellationToken);
     }
 }

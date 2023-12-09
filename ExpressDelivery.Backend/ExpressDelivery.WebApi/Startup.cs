@@ -4,6 +4,8 @@ using ExpressDelivery.Application;
 using ExpressDelivery.Application.Interfaces;
 using ExpressDelivery.Persistence;
 using ExpressDelivery.Application.Common.Mapping;
+using Microsoft.EntityFrameworkCore;
+using ExpressDelivery.WebApi.Middleware;
 
 namespace ExpressDelivery.WebApi
 {
@@ -70,6 +72,7 @@ namespace ExpressDelivery.WebApi
                 }
             });
 
+            app.UseCustomExceptionHandler();
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
