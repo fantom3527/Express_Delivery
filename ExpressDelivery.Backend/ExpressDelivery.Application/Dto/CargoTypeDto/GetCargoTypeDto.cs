@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.CargoTypeDto
 {
-    public class GetCargoTypeDto : IMapWith<CargoType>
+    public record class GetCargoTypeDto : IMapWith<CargoType>
     {
         public int Id { get; set; }
         public string Name { get; set; }

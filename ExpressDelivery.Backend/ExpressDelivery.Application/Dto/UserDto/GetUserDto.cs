@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.UserDto
 {
-    public class GetUserDto : IMapWith<User>
+    public record class GetUserDto : IMapWith<User>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

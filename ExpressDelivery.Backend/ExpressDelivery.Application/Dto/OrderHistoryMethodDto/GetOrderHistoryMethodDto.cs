@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.OrderHistoryMethodDto
 {
-    public class GetOrderHistoryMethodDto : IMapWith<OrderHistoryMethod>
+    public record class GetOrderHistoryMethodDto : IMapWith<OrderHistoryMethod>
     {
         public int Id { get; set; }
         public string Name { get; set; }

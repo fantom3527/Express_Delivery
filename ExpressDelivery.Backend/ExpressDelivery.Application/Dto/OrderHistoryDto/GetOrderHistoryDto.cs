@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.OrderHistoryDto
 {
-    public class GetOrderHistoryDto : IMapWith<OrderHistory>
+    public record class GetOrderHistoryDto : IMapWith<OrderHistory>
     {
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }

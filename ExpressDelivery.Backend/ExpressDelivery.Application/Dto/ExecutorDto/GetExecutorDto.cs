@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.ExecutorDto
 {
-    public class GetExecutorDto : IMapWith<Executor>
+    public record class GetExecutorDto : IMapWith<Executor>
     {
         public Guid Id { get; set; }
         public int ExecutorStatusId { get; set; }

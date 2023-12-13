@@ -4,7 +4,7 @@ using ExpressDelivery.Domain;
 
 namespace ExpressDelivery.Application.Dto.OrderStatusDto
 {
-    public class GetOrderStatusDto : IMapWith<OrderStatus>
+    public record class GetOrderStatusDto : IMapWith<OrderStatus>
     {
         public int Id { get; set; }
         public string Name { get; set; }
