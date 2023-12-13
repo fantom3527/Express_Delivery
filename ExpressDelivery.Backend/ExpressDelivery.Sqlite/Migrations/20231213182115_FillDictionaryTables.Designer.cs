@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ExpressDelivery.Persistence.Migrations
+namespace ExpressDelivery.Sqlite.Migrations
 {
     [DbContext(typeof(ExpressDeliveryDbContext))]
-    [Migration("20231203172805_FillTestData")]
-    partial class FillTestData
+    [Migration("20231213182115_FillDictionaryTables")]
+    partial class FillDictionaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

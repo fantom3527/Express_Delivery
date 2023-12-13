@@ -2,21 +2,21 @@
 
 #nullable disable
 
-namespace ExpressDelivery.Persistence.Migrations
+namespace ExpressDelivery.PostgreSql.Migrations
 {
     public partial class FillTestData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "user",
-                columns: new[] { "id", "name", "description" },
-                values: new object[,]
-                {
+               table: "user",
+               columns: new[] { "id", "name", "description" },
+               values: new object[,]
+               {
                     { Guid.Parse("A6BB65BB-5AC2-4AFA-8A28-2616F675B825"), "Костя Шипачев", "Программист" },
                     { Guid.Parse("7EEF1949-580D-4F67-B754-EC74CA91D836"), "Юлия Когнитова", "Швея" },
                     { Guid.Parse("7D35C407-7930-4BC8-A1DD-D8610155472A"), "Дима Усатый", "Тракторист" }
-                });
+               });
 
             migrationBuilder.InsertData(
                 table: "cargo",

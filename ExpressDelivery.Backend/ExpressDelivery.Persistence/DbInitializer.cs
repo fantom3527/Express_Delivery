@@ -1,4 +1,6 @@
-﻿namespace ExpressDelivery.Persistence
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ExpressDelivery.Persistence
 {
     public static class DbInitializer
     {
@@ -8,7 +10,7 @@
         /// <param name="context"></param>
         public static void Initialize(ExpressDeliveryDbContext context)
         {
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
         }
     }
 }

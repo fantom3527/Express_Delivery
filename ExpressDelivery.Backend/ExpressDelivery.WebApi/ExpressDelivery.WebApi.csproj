@@ -28,6 +28,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ExpressDelivery.Application\ExpressDelivery.Application.csproj" />
     <ProjectReference Include="..\ExpressDelivery.Persistence\ExpressDelivery.Persistence.csproj" />
+    <ProjectReference Include="..\ExpressDelivery.PostgreSql\ExpressDelivery.PostgreSql.csproj" />
+    <ProjectReference Include="..\ExpressDelivery.Sqlite\ExpressDelivery.Sqlite.csproj" />
   </ItemGroup>
 
 </Project>

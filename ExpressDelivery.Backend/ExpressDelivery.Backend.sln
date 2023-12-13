@@ -9,13 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A10757D5-75DA-4F85-A2AF-61D9E084B61B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.Domain", "ExpressDelivery.Domain\ExpressDelivery.Domain.csproj", "{F28469B3-8F77-4A00-BF6F-B04EC2F6A717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressDelivery.Domain", "ExpressDelivery.Domain\ExpressDelivery.Domain.csproj", "{F28469B3-8F77-4A00-BF6F-B04EC2F6A717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.Application", "ExpressDelivery.Application\ExpressDelivery.Application.csproj", "{BE8650C9-9EA0-47FD-8F1A-6B199EBA70A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressDelivery.Application", "ExpressDelivery.Application\ExpressDelivery.Application.csproj", "{BE8650C9-9EA0-47FD-8F1A-6B199EBA70A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.Persistence", "ExpressDelivery.Persistence\ExpressDelivery.Persistence.csproj", "{5C520268-4B01-4043-AD75-8A2A10017758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressDelivery.Persistence", "ExpressDelivery.Persistence\ExpressDelivery.Persistence.csproj", "{5C520268-4B01-4043-AD75-8A2A10017758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.WebApi", "ExpressDelivery.WebApi\ExpressDelivery.WebApi.csproj", "{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressDelivery.WebApi", "ExpressDelivery.WebApi\ExpressDelivery.WebApi.csproj", "{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{30F02FF5-9F81-4459-A8AF-5907B2DC8AF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.Sqlite", "ExpressDelivery.Sqlite\ExpressDelivery.Sqlite.csproj", "{A71B09C0-6DB0-4966-B465-13BEAE03C32C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressDelivery.PostgreSql", "ExpressDelivery.PostgreSql\ExpressDelivery.PostgreSql.csproj", "{88B67548-254F-42C9-AB81-B80176D0CCF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,14 @@ Global
 		{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A71B09C0-6DB0-4966-B465-13BEAE03C32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71B09C0-6DB0-4966-B465-13BEAE03C32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71B09C0-6DB0-4966-B465-13BEAE03C32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71B09C0-6DB0-4966-B465-13BEAE03C32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B67548-254F-42C9-AB81-B80176D0CCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B67548-254F-42C9-AB81-B80176D0CCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B67548-254F-42C9-AB81-B80176D0CCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B67548-254F-42C9-AB81-B80176D0CCF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +62,8 @@ Global
 		{BE8650C9-9EA0-47FD-8F1A-6B199EBA70A5} = {79FB2D35-95F1-43AA-8FE6-34C6A5C3E1D3}
 		{5C520268-4B01-4043-AD75-8A2A10017758} = {703B36D1-BD01-49E3-9634-AF6A45BF1AAE}
 		{93EC49A5-1BAB-41F0-8F57-99EDEBAB46FB} = {A10757D5-75DA-4F85-A2AF-61D9E084B61B}
+		{A71B09C0-6DB0-4966-B465-13BEAE03C32C} = {30F02FF5-9F81-4459-A8AF-5907B2DC8AF4}
+		{88B67548-254F-42C9-AB81-B80176D0CCF9} = {30F02FF5-9F81-4459-A8AF-5907B2DC8AF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5FB5580-A454-4303-B718-AE03210798EE}

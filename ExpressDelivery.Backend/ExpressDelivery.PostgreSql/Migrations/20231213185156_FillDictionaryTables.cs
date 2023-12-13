@@ -2,21 +2,21 @@
 
 #nullable disable
 
-namespace ExpressDelivery.Persistence.Migrations
+namespace ExpressDelivery.PostgreSql.Migrations
 {
     public partial class FillDictionaryTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "executor_status",
-                columns: new[] { "name", "code", "is_actual" },
-                values: new object[,]
-                {
+               table: "executor_status",
+               columns: new[] { "name", "code", "is_actual" },
+               values: new object[,]
+               {
                     { "Ожидает заказа", "wait", true },
                     { "Выполняет заказ", "executesorder", true },
                     { "Назначается заказ", "orderselection", true }
-                });
+               });
 
             migrationBuilder.InsertData(
                 table: "order_status",
@@ -30,7 +30,7 @@ namespace ExpressDelivery.Persistence.Migrations
                     { "Отменен", "cancelled", true },
                     { "Удален", "deleted", true }
                 });
-            
+
             migrationBuilder.InsertData(
                 table: "cargo_type",
                 columns: new[] { "name", "code", "is_actual" },
@@ -40,8 +40,8 @@ namespace ExpressDelivery.Persistence.Migrations
                     { "Ценные грузы", "valuable", true },
                     { "Перечисляемые грузы", "listed", true },
                     { "Техническое оборудование", "technicalequipment", true },
-                });    
-            
+                });
+
             migrationBuilder.InsertData(
                 table: "order_history_method",
                 columns: new[] { "name", "code", "is_actual" },

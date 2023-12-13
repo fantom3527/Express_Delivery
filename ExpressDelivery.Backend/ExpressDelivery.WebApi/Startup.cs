@@ -23,8 +23,30 @@ namespace ExpressDelivery.WebApi
                 config.AddProfile(new AssemblyMappingProfile(typeof(IExpressDeliveryDbContext).Assembly));
             });
 
+            services.AddDbContext<ExpressDeliveryDbContext>(options =>
+            {
+                var provider = Configuration.GetValue("provider", Provider.Sqlite.Name);
+
+                options.UseSnakeCaseNamingConvention();
+
+                if (provider == Provider.Sqlite.Name)
+                {
+                    options.UseSqlite(
+                        Configuration.GetConnectionString(Provider.Sqlite.Name)!,
+                        x => x.MigrationsAssembly(Provider.Sqlite.Assembly)
+                    );
+                }
+                if (provider == Provider.PostgreSql.Name)
+                {
+                    options.UseNpgsql(
+                        Configuration.GetConnectionString(Provider.PostgreSql.Name)!,
+                        x => x.MigrationsAssembly(Provider.PostgreSql.Assembly)
+                    );
+                }
+            });
+
             services.AddApplication();
-            services.AddPersistence(Configuration);
+            services.AddPersistence();
             services.AddControllers();
 
             // Для теста предоставим доступ для всех
