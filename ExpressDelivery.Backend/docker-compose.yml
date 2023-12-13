@@ -1,0 +1,49 @@
+version: "3.9"
+networks:
+    express-delivery-dev:
+        driver: bridge
+services:
+    app: 
+        container_name: express-delivery-dev
+        build: 
+            context: .
+            dockerfile: Dockerfile    
+        ports:
+            - "7247:80"
+        networks:
+            - express-delivery-dev
+        depends_on:
+            - postgres_db
+
+    postgres_db:
+        container_name: postgres
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 123
+            POSTGRES_DB: testExpressDelivery
+        ports:
+            - "5432:5432"
+        networks:
+            - express-delivery-dev
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+            
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: pumpum@gmail.com
+            PGADMIN_DEFAULT_PASSWORD: root
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        ports:
+            - "5050:80"
+        restart: unless-stopped
+        networks:
+            - express-delivery-dev
+        depends_on:
+            - postgres_db
+volumes:
+    postgres-data:
+    pgadmin-data:
