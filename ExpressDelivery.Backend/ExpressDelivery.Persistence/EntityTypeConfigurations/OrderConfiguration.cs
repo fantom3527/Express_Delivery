@@ -28,7 +28,7 @@ namespace ExpressDelivery.Domain
             builder.Property(order => order.Description).HasMaxLength(1000);
             builder.Property(order => order.ReceiptTime).IsRequired();
             builder.Property(order => order.DeliveryTime).IsRequired();
-            builder.Property(order => order.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(order => order.Ts).HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

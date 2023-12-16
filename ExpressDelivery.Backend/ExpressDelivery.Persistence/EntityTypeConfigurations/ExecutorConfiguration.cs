@@ -17,7 +17,7 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
             builder.Property(executor => executor.ExecutorStatusId).IsRequired();
             builder.Property(executor => executor.Name).IsRequired().HasMaxLength(50);
             builder.Property(executor => executor.Description).HasMaxLength(1000);
-            builder.Property(executor => executor.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(executor => executor.Ts).HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
             builder.Property(orderStatus => orderStatus.Name).IsRequired().HasMaxLength(50);
             builder.Property(orderStatus => orderStatus.Code).IsRequired().HasMaxLength(20);
             builder.Property(orderStatus => orderStatus.IsActual).IsRequired();
-            builder.Property(orderStatus => orderStatus.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(orderStatus => orderStatus.Ts).HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

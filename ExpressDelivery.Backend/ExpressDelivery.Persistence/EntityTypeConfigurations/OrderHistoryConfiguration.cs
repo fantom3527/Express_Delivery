@@ -21,7 +21,7 @@ namespace ExpressDelivery.Persistence.EntityTypeConfigurations
                    .HasForeignKey(orderHistory => orderHistory.OrderHistoryMethodId);
             builder.Property(orderHistory => orderHistory.OrderHistoryMethodId).IsRequired();
             builder.Property(orderHistory => orderHistory.Description).HasMaxLength(1000).IsRequired(false);
-            builder.Property(orderHistory => orderHistory.Ts).HasColumnType("DATETIME").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(orderHistory => orderHistory.Ts).HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

@@ -9,14 +9,14 @@ namespace ExpressDelivery.PostgreSql.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-               table: "user",
-               columns: new[] { "id", "name", "description" },
-               values: new object[,]
-               {
+                table: "user",
+                columns: new[] { "id", "name", "description" },
+                values: new object[,]
+                {
                     { Guid.Parse("A6BB65BB-5AC2-4AFA-8A28-2616F675B825"), "Костя Шипачев", "Программист" },
                     { Guid.Parse("7EEF1949-580D-4F67-B754-EC74CA91D836"), "Юлия Когнитова", "Швея" },
                     { Guid.Parse("7D35C407-7930-4BC8-A1DD-D8610155472A"), "Дима Усатый", "Тракторист" }
-               });
+                });
 
             migrationBuilder.InsertData(
                 table: "cargo",
@@ -47,11 +47,8 @@ namespace ExpressDelivery.PostgreSql.Migrations
                 {
                     { Guid.Parse("A7F0A23D-74B7-4C12-86D9-1AEF2C9C5568"), Guid.Parse("A6BB65BB-5AC2-4AFA-8A28-2616F675B825"), 3,
                      Guid.Parse("A4FC44C7-A880-451C-938C-78D5515201ED"), "Новосибирск, улица Лениа 2", "Орск, улица Карпова 10", "Доставка компьютера", "Внимание! Доставка ценных грузов",
-                     "2023-10-10 00:00:00", "2023-10-23 00:00:00" },
+                      new DateTime(2023, 1, 3),  new DateTime(2023, 1, 3) },
 
-                    { Guid.Parse("8CC409BF-33EA-4FD5-8952-28EC247D4C4B"), Guid.Parse("7EEF1949-580D-4F67-B754-EC74CA91D836"), 1,
-                     null, "Владивосток, улица Беринга 1", "Кемерово, улица Беглово 9",
-                     "Order", "No cargo has been added to the", "2023-11-01 00:00:00", "2023-11-03 00:00:00" },
                 });
 
             migrationBuilder.UpdateData(

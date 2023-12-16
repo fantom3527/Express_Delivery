@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ExpressDelivery.PostgreSql.Migrations
 {
     [DbContext(typeof(ExpressDeliveryDbContext))]
-    [Migration("20231213183328_Create")]
-    partial class Create
+    [Migration("20231216131100_FillDictionaryTables")]
+    partial class FillDictionaryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,8 +37,8 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
@@ -53,7 +53,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -100,7 +100,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -139,7 +139,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -183,7 +183,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -246,7 +246,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -295,7 +295,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -342,7 +342,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -383,7 +383,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -418,7 +418,7 @@ namespace ExpressDelivery.PostgreSql.Migrations
 
                     b.Property<DateTime>("Ts")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("ts")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
